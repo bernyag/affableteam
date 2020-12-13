@@ -33,8 +33,7 @@ import javax.xml.bind.annotation.XmlRootElement;
     , @NamedQuery(name = "Books.findByUnitsavailable", query = "SELECT b FROM Books b WHERE b.unitsavailable = :unitsavailable")
     , @NamedQuery(name = "Books.findByUnitsonhold", query = "SELECT b FROM Books b WHERE b.unitsonhold = :unitsonhold")
     , @NamedQuery(name = "Books.findByPrice", query = "SELECT b FROM Books b WHERE b.price = :price")
-    , @NamedQuery(name = "Books.holdStock" , query = "UPDATE Books SET unitsonhold = 999 WHERE isbn = 1")
-    //, @NamedQuery(name = "Books.holdStock" , query = "UPDATE Books b SET b.unitsonhold = b.unitsonhold + :units, b.unitsavailable = b.unitsavailable - :units WHERE b.isbn = :isbn")
+    , @NamedQuery(name = "Books.holdStock" , query = "UPDATE Books b SET b.unitsonhold = b.unitsonhold + :units, b.unitsavailable = b.unitsavailable - :units WHERE b.isbn = :isbn")
 })
 public class Books implements Serializable {
 

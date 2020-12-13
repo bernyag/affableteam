@@ -8,34 +8,21 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebService;
 
-/**
- * Codigo perteneciente a: Tutorial de BPEL con OpenESB
- *
- * @author www.adictosaltrabajo.com - Ivan Garcia Puebla
- * @version 1.0
- */
+
 @WebService()
 public class WSAlmacen {
 
     @EJB
-    private BooksFacade ejbRef;// Add business logic below. (Right-click in editor and choose
-    // "Insert Code > Add Web Service Operation")
-
-    /**
-     * Operacion de un servicio web implementado con JAX-WS que comprueba el
-     * stock de un libro.
-     *
-     * @param ISBN Identificador de un libro
-     * @param unidades Unidades del producto solicitadas
-     * @return True si hay unidades disponibles.
-     */
+    private BooksFacade ejbRef;
+    
+    
     @WebMethod(operationName = "findByIsbn")
-    public Books findByIsbn(@WebParam(name = "isbn") int isbn) {
+    public Books findByIsbn(@WebParam(name = "isbn") long isbn) {
         return ejbRef.findByIsbn(isbn);
     }
 
     @WebMethod(operationName = "checkStock")
-    public boolean checkStock(@WebParam(name = "isbn") int isbn, @WebParam(name = "unidades") int unidades) {
+    public boolean checkStock(@WebParam(name = "isbn") long isbn, @WebParam(name = "units") int units) {
 
         String strUnitsAvailable;
         int intUnitsAvailable = 0;
@@ -43,21 +30,28 @@ public class WSAlmacen {
 
         strUnitsAvailable = ejbRef.unitsAvailable(isbn);
         intUnitsAvailable = Integer.parseInt(strUnitsAvailable);
-        if (intUnitsAvailable >= unidades) {
+        if (intUnitsAvailable >= units) {
             res = true;
         }
         return res;
     }
 
     @WebMethod(operationName = "holdStock")
-    public void holdStock(@WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
+    public void holdStock(@WebParam(name = "isbn") long isbn, @WebParam(name = "units") int units) {
         ejbRef.holdStock(isbn, units);
     }
 
+    /**
+     * Web service that validates if there is stock for a certain book and puts it on hold for funds validation
+     * 
+     * @param ISBN International Serial Book Number - book identifier
+     * @param units Units of books being requested
+     * @return a String with the message corresponding to any specific error (invalid ISBN format, ISBN not in database, invalid units value, insufficient stock or successful order.
+     */
     @WebMethod(operationName = "startOrder")
-    public String startOrder(@WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
+    public String startOrder(@WebParam(name = "isbn") long isbn, @WebParam(name = "units") int units) {
         String res = "";
-        if (Integer.toString(isbn).length() == 2) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
+        if (Long.toString(isbn).length() == 13) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
             if (units >= 1) {
                 Books b = ejbRef.findByIsbn(isbn);
                 if (b.getIsbn() != -1) {    //Check if the ISBN is in the database

@@ -17,8 +17,8 @@ public class PojoTiendaElectronica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final int ISBN = 13;
-        final int UNITS = 0;
+        final Long ISBN = 1311111111111L;
+        final int UNITS = 26;
         Books b = findByIsbn(ISBN);
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
@@ -29,13 +29,14 @@ public class PojoTiendaElectronica {
         
     }
 
-    private static Books findByIsbn(int isbn) {
+    private static Books findByIsbn(long isbn) {
         wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
         wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
         return port.findByIsbn(isbn);
     }
 
-    private static String startOrder(int isbn, int units) {
+    
+    private static String startOrder(long isbn, int units) {
         wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
         wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
         return port.startOrder(isbn, units);

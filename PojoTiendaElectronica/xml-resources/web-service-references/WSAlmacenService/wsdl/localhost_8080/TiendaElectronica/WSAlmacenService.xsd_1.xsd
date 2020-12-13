@@ -20,7 +20,7 @@
 
 <xs:complexType name="findByIsbn">
 <xs:sequence>
-<xs:element name="isbn" type="xs:int"/>
+<xs:element name="isbn" type="xs:long"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -32,7 +32,7 @@
 
 <xs:complexType name="books">
 <xs:sequence>
-<xs:element name="isbn" type="xs:int" minOccurs="0"/>
+<xs:element name="isbn" type="xs:long"/>
 <xs:element name="price" type="xs:decimal" minOccurs="0"/>
 <xs:element name="unitsavailable" type="xs:int"/>
 <xs:element name="unitsonhold" type="xs:int"/>
@@ -41,7 +41,7 @@
 
 <xs:complexType name="startOrder">
 <xs:sequence>
-<xs:element name="isbn" type="xs:int"/>
+<xs:element name="isbn" type="xs:long"/>
 <xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
@@ -54,7 +54,7 @@
 
 <xs:complexType name="holdStock">
 <xs:sequence>
-<xs:element name="isbn" type="xs:int"/>
+<xs:element name="isbn" type="xs:long"/>
 <xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
@@ -65,8 +65,8 @@
 
 <xs:complexType name="checkStock">
 <xs:sequence>
-<xs:element name="isbn" type="xs:int"/>
-<xs:element name="unidades" type="xs:int"/>
+<xs:element name="isbn" type="xs:long"/>
+<xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 

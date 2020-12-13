@@ -31,14 +31,16 @@ public class BooksFacade extends AbstractFacade<Books> {
         super(Books.class);
     }
     
-    public java.util.List<Books> findByIsbn(int isbn)
+    public Books findByIsbn(int isbn)
     {
+        Books b = new Books(-1);    //return a book with -1 for an ISBN that is not registered in the Database
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.findByIsbn", Books.class);
         query.setParameter("isbn", isbn);
         java.util.List<Books> lista= query.getResultList();
-
-        return lista;
+        if (!lista.isEmpty())
+            b = lista.get(0);
+        return b;
     }
     
     public String unitsAvailable(int isbn)
@@ -57,8 +59,9 @@ public class BooksFacade extends AbstractFacade<Books> {
     {
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.holdStock", Books.class);
-        //query.setParameter("isbn", isbn);
-        //query.setParameter("units", units);          
+        query.setParameter("isbn", isbn);
+        query.setParameter("units", units);   
+        query.executeUpdate();
     }
     
 }

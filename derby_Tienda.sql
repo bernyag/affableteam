@@ -1,5 +1,3 @@
-connect 'jdbc:derby://localhost:1527/tienda01;user=app;password=app';
-
 DROP TABLE books;
 DROP TABLE client;
 DROP TABLE order_book;

@@ -33,12 +33,14 @@ public class BooksFacade extends AbstractFacade<Books> {
     
     public Books findByIsbn(int isbn)
     {
+        Books b = new Books(-1);    //return a book with -1 for an ISBN that is not registered in the Database
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.findByIsbn", Books.class);
         query.setParameter("isbn", isbn);
         java.util.List<Books> lista= query.getResultList();
-
-        return lista;
+        if (!lista.isEmpty())
+            b = lista.get(0);
+        return b;
     }
     
     public String unitsAvailable(int isbn)

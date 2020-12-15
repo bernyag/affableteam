@@ -1,4 +1,4 @@
-package wsAlmacen;
+package webservices;
 
 import entities.Books;
 import facades.BooksFacade;

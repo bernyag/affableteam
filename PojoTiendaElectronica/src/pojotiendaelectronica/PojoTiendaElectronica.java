@@ -17,7 +17,15 @@ public class PojoTiendaElectronica {
      */
    
     public static void main(String[] args) {
-        // TODO code application logic here
+        final int ISBN = 13;
+        final int UNITS = 0;
+        Books b = findByIsbn(ISBN);
+        System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
+                + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
+        System.out.println(startOrder(ISBN, UNITS));
+        b = findByIsbn(ISBN);
+        System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
+                + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
         java.util.List<webservices.Books> listBooks = findByIsbn(1);
         listBooks.forEach((b) -> {
@@ -34,17 +42,16 @@ public class PojoTiendaElectronica {
 
     }
 
-
-    private static java.util.List<webservices.Books> findByIsbn(int isbn) {
-        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
-        webservices.WSAlmacen port = service.getWSAlmacenPort();
+    private static Books findByIsbn(int isbn) {
+        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
+        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
         return port.findByIsbn(isbn);
     }
 
-    private static boolean comprobarStock(int isbn, int unidades) {
-        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
-        webservices.WSAlmacen port = service.getWSAlmacenPort();
-        return port.comprobarStock(isbn, unidades);
+    private static String startOrder(int isbn, int units) {
+        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
+        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
+        return port.startOrder(isbn, units);
     }
 
     private static void holdStock(int isbn, int unidades) {

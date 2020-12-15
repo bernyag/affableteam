@@ -14,21 +14,36 @@
 
 <xs:element name="holdStockResponse" type="tns:holdStockResponse"/>
 
-<xs:complexType name="holdStock">
+<xs:element name="startOrder" type="tns:startOrder"/>
+
+<xs:element name="startOrderResponse" type="tns:startOrderResponse"/>
+
+<xs:complexType name="findByIsbn">
+<xs:sequence>
+<xs:element name="isbn" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findByIsbnResponse">
 <xs:sequence>
 <xs:element name="isbn" type="xs:int"/>
 <xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="holdStockResponse">
-<xs:sequence/>
+<xs:complexType name="books">
+<xs:sequence>
+<xs:element name="isbn" type="xs:int" minOccurs="0"/>
+<xs:element name="price" type="xs:decimal" minOccurs="0"/>
+<xs:element name="unitsavailable" type="xs:int"/>
+<xs:element name="unitsonhold" type="xs:int"/>
+</xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="comprobarStock">
 <xs:sequence>
 <xs:element name="isbn" type="xs:int"/>
-<xs:element name="unidades" type="xs:int"/>
+<xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -41,12 +56,14 @@
 <xs:complexType name="findByIsbn">
 <xs:sequence>
 <xs:element name="isbn" type="xs:int"/>
+<xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
 <xs:complexType name="findByIsbnResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:books" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="isbn" type="xs:int"/>
+<xs:element name="unidades" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 

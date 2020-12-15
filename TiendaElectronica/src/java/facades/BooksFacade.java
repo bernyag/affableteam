@@ -31,7 +31,7 @@ public class BooksFacade extends AbstractFacade<Books> {
         super(Books.class);
     }
     
-    public java.util.List<Books> findByIsbn(int isbn)
+    public Books findByIsbn(int isbn)
     {
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.findByIsbn", Books.class);

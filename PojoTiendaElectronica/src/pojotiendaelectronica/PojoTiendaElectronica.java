@@ -5,6 +5,7 @@
  */
 package pojotiendaelectronica;
 
+
 /**
  *
  * @author bernardoaltamirano
@@ -14,18 +15,20 @@ public class PojoTiendaElectronica {
     /**
      * @param args the command line arguments
      */
+   
     public static void main(String[] args) {
         // TODO code application logic here
-        java.util.List<wsalmacen.Books> listBooks = findByIsbn(1);
-        for(wsalmacen.Books b:listBooks)
+        
+        java.util.List<webservices.Books> listBooks = findByIsbn(1);
+        for(webservices.Books b:listBooks)
         {
             System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                     + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         }
         System.out.println(comprobarStock(1, 1));
         holdStock(1,7);
-        java.util.List<wsalmacen.Books> listBooks2 = findByIsbn(1);
-        for(wsalmacen.Books b:listBooks2)
+        java.util.List<webservices.Books> listBooks2 = findByIsbn(1);
+        for(webservices.Books b:listBooks2)
         {
             System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                     + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
@@ -34,26 +37,22 @@ public class PojoTiendaElectronica {
     }
 
 
-    private static java.util.List<wsalmacen.Books> findByIsbn(int isbn) {
-        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
-        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
+    private static java.util.List<webservices.Books> findByIsbn(int isbn) {
+        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
+        webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.findByIsbn(isbn);
     }
 
     private static boolean comprobarStock(int isbn, int unidades) {
-        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
-        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
+        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
+        webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.comprobarStock(isbn, unidades);
     }
 
     private static void holdStock(int isbn, int unidades) {
-        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
-        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
+        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
+        webservices.WSAlmacen port = service.getWSAlmacenPort();
         port.holdStock(isbn, unidades);
     }
-    
-    
-    
-    
     
 }

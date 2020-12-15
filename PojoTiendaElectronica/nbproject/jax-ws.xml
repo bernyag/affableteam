@@ -5,7 +5,7 @@
     <client name="WSAlmacenService">
       <wsdl-url>http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL</wsdl-url>
       <local-wsdl-file>localhost_8080/TiendaElectronica/WSAlmacenService.wsdl</local-wsdl-file>
-      <package-name>wsalmacen</package-name>
+      <package-name>webservices</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>

@@ -3,6 +3,9 @@
     <type>org.netbeans.modules.java.j2seproject</type>
     <configuration>
         <buildExtensions xmlns="http://www.netbeans.org/ns/ant-build-extender/1">
+            <extension file="pojo-bld.xml" id="pojoproject">
+                <dependency dependsOn="pojo-annotation-processor" target="-post-jar"/>
+            </extension>
             <extension file="jaxws-build.xml" id="jaxws">
                 <dependency dependsOn="wsimport-client-generate" target="-pre-pre-compile"/>
             </extension>

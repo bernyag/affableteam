@@ -18,9 +18,9 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 public class DatabaseHelper {
-    private Connection conn;
-    private String[] tables = {"books", "client", "order_book", "delivery_company", "delivery_order"};
-    private String[] createQueries = {
+    private final Connection conn;
+    private final String[] tables = {"books", "client", "order_book", "delivery_company", "delivery_order"};
+    private final String[] createQueries = {
         "CREATE TABLE books(" +
             " isbn INT NOT NULL GENERATED ALWAYS AS IDENTITY" +
             " CONSTRAINT BOOKS_PK PRIMARY KEY, " +
@@ -72,33 +72,54 @@ public class DatabaseHelper {
         stmt.execute(query);
     }
     
+    public void removeTables() {
+        System.out.println("Droping tables...");
+        String[] dropOrder = {"delivery_order", "delivery_company", "order_book", "client", "books"};
+        for (String table : dropOrder) {
+            try {
+                executeStatement("DROP TABLE " + table);
+            } catch (SQLException ex) {
+                if (ex.getErrorCode() != 30000) {
+                    Logger.getLogger(DatabaseHelper.class.getName()).log(Level.INFO, null, ex);
+                } else {
+                    return;
+                }
+            }
+        }
+    }
+    
+    public void createTables() {
+        System.out.println("Creating tables...");
+        for (String createQuery : createQueries) {
+            try {
+                executeStatement(createQuery);
+            } catch (SQLException ex) {
+                if (ex.getErrorCode() != 30000) {
+                    Logger.getLogger(DatabaseHelper.class.getName()).log(Level.INFO, null, ex);
+                } else {
+                    return;
+                }
+            }
+        }
+    }
+    
+    public void seedDatabase() throws SQLException {
+        System.out.println("Seeding database...");
+        String[] inserts = {
+            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " 
+                + "VALUES (100,0,399.00)"
+        };
+        for (String query : inserts) {
+            executeStatement(query);
+        }
+    }
+    
     public void givenEmptyDatabase() throws SQLException {
+        System.out.println("Empty DB...");
         String deleteQuery = "DELETE FROM ";
         for (String table : tables) {
             executeStatement(deleteQuery + table);
         }
     }
     
-    private void createTables() {
-        for (String createQuery : createQueries) {
-            try {
-                // TODO: execute statement only
-                executeStatement(createQuery);
-            } catch (SQLException ex) {
-                int errorCode = ex.getErrorCode();
-                if (errorCode != 30000) {
-                    Logger.getLogger(DatabaseHelper.class.getName()).log(Level.INFO, null, ex);
-                } else {
-                    System.out.println("Table already exists");
-                }
-            }
-        }
-    }
-    
-    public static void main(String args[]) throws Exception {
-        
-        DatabaseHelper db = new DatabaseHelper();
-        db.createTables();
-        
-   }
 }

@@ -20,19 +20,17 @@ public class PojoTiendaElectronica {
         // TODO code application logic here
         
         java.util.List<webservices.Books> listBooks = findByIsbn(1);
-        for(webservices.Books b:listBooks)
-        {
+        listBooks.forEach((b) -> {
             System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                     + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
-        }
+        });
         System.out.println(comprobarStock(1, 1));
         holdStock(1,7);
         java.util.List<webservices.Books> listBooks2 = findByIsbn(1);
-        for(webservices.Books b:listBooks2)
-        {
+        listBooks2.forEach((b) -> {
             System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                     + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
-        }
+        });
 
     }
 

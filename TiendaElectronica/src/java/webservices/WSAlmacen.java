@@ -1,7 +1,7 @@
-package wsAlmacen;
+package webservices;
 
 import entities.Books;
-import facade.BooksFacade;
+import facades.BooksFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebMethod;

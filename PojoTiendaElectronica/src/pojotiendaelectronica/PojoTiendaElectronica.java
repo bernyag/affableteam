@@ -5,7 +5,7 @@
  */
 package pojotiendaelectronica;
 
-import wsalmacen.Books;
+import webservices.Books;
 
 /**
  *
@@ -30,14 +30,14 @@ public class PojoTiendaElectronica {
     }
 
     private static Books findByIsbn(int isbn) {
-        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
-        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
+        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
+        webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.findByIsbn(isbn);
     }
 
     private static String startOrder(int isbn, int units) {
-        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
-        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
+        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
+        webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.startOrder(isbn, units);
     }
 }

@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package facade;
+package facades;
 
 import entities.Books;
 import javax.ejb.Stateless;
@@ -59,9 +59,8 @@ public class BooksFacade extends AbstractFacade<Books> {
     {
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.holdStock", Books.class);
-        query.setParameter("isbn", isbn);
-        query.setParameter("units", units);   
-        query.executeUpdate();
+        //query.setParameter("isbn", isbn);
+        //query.setParameter("units", units);          
     }
     
 }

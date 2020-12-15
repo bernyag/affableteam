@@ -31,7 +31,7 @@
     </target>
     <target name="wsimport-client-clean-WSAlmacenService" depends="-init-project">
         <delete dir="${build.generated.dir}/jax-wsCache/WSAlmacenService"/>
-        <delete dir="${build.generated.sources.dir}/jax-ws/wsalmacen"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
     <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService"/>
 </project>

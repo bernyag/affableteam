@@ -31,7 +31,7 @@ public class BooksFacade extends AbstractFacade<Books> {
         super(Books.class);
     }
     
-    public Books findByIsbn(long isbn)
+    public Books findByIsbn(int isbn)
     {
         Books b = new Books(-1);    //return a book with -1 for an ISBN that is not registered in the Database
         em = getEntityManager();
@@ -43,7 +43,7 @@ public class BooksFacade extends AbstractFacade<Books> {
         return b;
     }
     
-    public String unitsAvailable(long isbn)
+    public String unitsAvailable(int isbn)
     {
         String res = "That ISBN is not available";
         em = getEntityManager();
@@ -55,7 +55,7 @@ public class BooksFacade extends AbstractFacade<Books> {
         return res;
     }
     
-    public void holdStock(long isbn, int units)
+    public void holdStock(int isbn, int units)
     {
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.holdStock", Books.class);

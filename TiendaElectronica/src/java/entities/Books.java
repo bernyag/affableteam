@@ -42,7 +42,7 @@ public class Books implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
     @Column(name = "ISBN")
-    private Long isbn;
+    private Integer isbn;
     @Basic(optional = false)
     @NotNull
     @Column(name = "UNITSAVAILABLE")
@@ -60,22 +60,22 @@ public class Books implements Serializable {
     public Books() {
     }
 
-    public Books(long isbn) {
+    public Books(Integer isbn) {
         this.isbn = isbn;
     }
 
-    public Books(long isbn, int unitsavailable, int unitsonhold, BigDecimal price) {
+    public Books(Integer isbn, int unitsavailable, int unitsonhold, BigDecimal price) {
         this.isbn = isbn;
         this.unitsavailable = unitsavailable;
         this.unitsonhold = unitsonhold;
         this.price = price;
     }
 
-    public long getIsbn() {
+    public Integer getIsbn() {
         return isbn;
     }
 
-    public void setIsbn(long isbn) {
+    public void setIsbn(Integer isbn) {
         this.isbn = isbn;
     }
 

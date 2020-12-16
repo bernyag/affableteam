@@ -33,5 +33,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/WSAlmacenService"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService"/>
+    <target name="wsimport-client-WSCobro" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WSCobro"/>
+        <property name="wsdl-WSCobro" location="xml-resources/web-service-references/WSCobro/wsdl/localhost_8080/TiendaElectronica/WSCobro.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WSCobro" destdir="${build.generated.dir}/jax-wsCache/WSCobro" wsdl="${wsdl-WSCobro}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/TiendaElectronica/WSCobro?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-WSCobro}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WSCobro"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WSCobro">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WSCobro" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/WSCobro"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService, wsimport-client-WSCobro"/>
 </project>

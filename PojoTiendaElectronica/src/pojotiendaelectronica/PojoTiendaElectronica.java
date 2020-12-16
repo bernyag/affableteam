@@ -5,6 +5,7 @@
  */
 package pojotiendaelectronica;
 
+import java.math.BigDecimal;
 import webservices.Books;
 
 /**
@@ -27,6 +28,18 @@ public class PojoTiendaElectronica {
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
+        
+        
+        // Test WS Cobro
+        
+        
+        
+        
+        webservices.OrderBook ob = new webservices.OrderBook();
+        
+        BigDecimal balance = new BigDecimal(getNewBalance(1,2,1));
+ 
+        System.out.println(""+balance);
     }
 
     private static Books findByIsbn(int isbn) {
@@ -40,4 +53,11 @@ public class PojoTiendaElectronica {
         webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.startOrder(isbn, units);
     }
+
+    private static String getNewBalance(int isbn, int idCliente, int cantLibros) {
+        webservices.WSCobro_Service service = new webservices.WSCobro_Service();
+        webservices.WSCobro port = service.getWSCobroPort();
+        return port.getNewBalance(isbn, idCliente, cantLibros);
+    }
+    
 }

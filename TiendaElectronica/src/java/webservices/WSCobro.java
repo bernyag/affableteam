@@ -119,11 +119,11 @@ public class WSCobro {
             
             System.out.println("Balance "+balance+" = "+bal);
             if(units >= 1){
-               
+                Books bk = ejbRef2.findByIsbn(isbn);
+                BigDecimal monto = bk.getPrice();
                 if(bal>=0){ //Check if the client has enough credits to proceed with the purchase
                     Client clt = ejbRefClient.findById(idClt);
-                    Books bk = ejbRef2.findByIsbn(isbn);
-                    BigDecimal monto = bk.getPrice();
+                    
                     BigDecimal uds = new BigDecimal(units);
                     monto = monto.multiply(uds);
                     
@@ -144,7 +144,7 @@ public class WSCobro {
                 else{ // The client hasn't enough credits
                     discountHold(isbn, units); //discounts the previously hold books
                     reStockHold(isbn, units);
-                    res = "There are unsufficient credits in the client's account to complete the purchase";
+                    res = "There are unsufficient credits in the client's account to complete the purchase. The total amount is $"+monto+", but the client has $"+monto.add(new BigDecimal(bal));
                 }
             }
         }

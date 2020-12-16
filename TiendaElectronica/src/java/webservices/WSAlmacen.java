@@ -57,22 +57,23 @@ public class WSAlmacen {
     @WebMethod(operationName = "startOrder")
     public String startOrder(@WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
         String res = "";
-        if (Integer.toString(isbn).length() == 2) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
-            if (units >= 1) {
-                Books b = ejbRef.findByIsbn(isbn);
-                if (b.getIsbn() != -1) {    //Check if the ISBN is in the database
+        if (Integer.toString(isbn).length() == 1) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
+
+            Books b = ejbRef.findByIsbn(isbn);
+            if (b.getIsbn() != -1) {    //Check if the ISBN is in the database
+                if (units >= 1) {
                     if (checkStock(isbn, units)) {
                         holdStock(isbn, units);
                         res = "An order has been created for the book with ISBN = " + isbn + "."
                                 + "\n\t" + units + " unit(s) have been placed on hold while validating the account's funds.";
                     } else {
-                        res = "There is unsufficient stock for the book with ISBN = " + isbn + ". The stock available is of " + b.getUnitsavailable() + " unit(s) and you tried " + units +", please try an amount less than or equal to the one available.";
+                        res = "There is unsufficient stock for the book with ISBN = " + isbn + ". The stock available is of " + b.getUnitsavailable() + " unit(s) and you tried " + units + ", please try an amount less than or equal to the one available.";
                     }
                 } else {
-                    res = "The books with ISBN  = " + isbn + " is not registered in the database. Please try with another ISBN.";
+                    res = "Please enter an amount of units greater than 0.";
                 }
             } else {
-                res = "Please enter an amount of units greater than 0.";
+                res = "The books with ISBN  = " + isbn + " is not registered in the database. Please try with another ISBN.";
             }
 
         } else {

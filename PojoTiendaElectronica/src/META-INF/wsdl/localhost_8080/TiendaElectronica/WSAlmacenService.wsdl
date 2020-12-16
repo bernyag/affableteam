@@ -4,23 +4,11 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/TiendaElectronica/WSAlmacenService?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="findByIsbn">
-<part name="parameters" element="tns:findByIsbn"/>
-</message>
-<message name="findByIsbnResponse">
-<part name="parameters" element="tns:findByIsbnResponse"/>
-</message>
 <message name="checkStock">
 <part name="parameters" element="tns:checkStock"/>
 </message>
 <message name="checkStockResponse">
 <part name="parameters" element="tns:checkStockResponse"/>
-</message>
-<message name="holdStock">
-<part name="parameters" element="tns:holdStock"/>
-</message>
-<message name="holdStockResponse">
-<part name="parameters" element="tns:holdStockResponse"/>
 </message>
 <message name="startOrder">
 <part name="parameters" element="tns:startOrder"/>
@@ -28,35 +16,38 @@
 <message name="startOrderResponse">
 <part name="parameters" element="tns:startOrderResponse"/>
 </message>
+<message name="findByIsbn">
+<part name="parameters" element="tns:findByIsbn"/>
+</message>
+<message name="findByIsbnResponse">
+<part name="parameters" element="tns:findByIsbnResponse"/>
+</message>
+<message name="holdStock">
+<part name="parameters" element="tns:holdStock"/>
+</message>
+<message name="holdStockResponse">
+<part name="parameters" element="tns:holdStockResponse"/>
+</message>
 <portType name="WSAlmacen">
-<operation name="findByIsbn">
-<input wsam:Action="http://webservices/WSAlmacen/findByIsbnRequest" message="tns:findByIsbn"/>
-<output wsam:Action="http://webservices/WSAlmacen/findByIsbnResponse" message="tns:findByIsbnResponse"/>
-</operation>
 <operation name="checkStock">
 <input wsam:Action="http://webservices/WSAlmacen/checkStockRequest" message="tns:checkStock"/>
 <output wsam:Action="http://webservices/WSAlmacen/checkStockResponse" message="tns:checkStockResponse"/>
-</operation>
-<operation name="holdStock">
-<input wsam:Action="http://webservices/WSAlmacen/holdStockRequest" message="tns:holdStock"/>
-<output wsam:Action="http://webservices/WSAlmacen/holdStockResponse" message="tns:holdStockResponse"/>
 </operation>
 <operation name="startOrder">
 <input wsam:Action="http://webservices/WSAlmacen/startOrderRequest" message="tns:startOrder"/>
 <output wsam:Action="http://webservices/WSAlmacen/startOrderResponse" message="tns:startOrderResponse"/>
 </operation>
+<operation name="findByIsbn">
+<input wsam:Action="http://webservices/WSAlmacen/findByIsbnRequest" message="tns:findByIsbn"/>
+<output wsam:Action="http://webservices/WSAlmacen/findByIsbnResponse" message="tns:findByIsbnResponse"/>
+</operation>
+<operation name="holdStock">
+<input wsam:Action="http://webservices/WSAlmacen/holdStockRequest" message="tns:holdStock"/>
+<output wsam:Action="http://webservices/WSAlmacen/holdStockResponse" message="tns:holdStockResponse"/>
+</operation>
 </portType>
 <binding name="WSAlmacenPortBinding" type="tns:WSAlmacen">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="findByIsbn">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="checkStock">
 <soap:operation soapAction=""/>
 <input>
@@ -66,7 +57,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="holdStock">
+<operation name="startOrder">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -75,7 +66,16 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="startOrder">
+<operation name="findByIsbn">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="holdStock">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

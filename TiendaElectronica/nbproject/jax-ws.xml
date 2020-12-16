@@ -4,11 +4,11 @@
     <service name="WSAlmacen">
       <implementation-class>webservices.WSAlmacen</implementation-class>
     </service>
-    <service name="WSCobro">
-      <implementation-class>webservices.WSCobro</implementation-class>
-    </service>
     <service name="WsClient">
       <implementation-class>webservices.WsClient</implementation-class>
+    </service>
+    <service name="WSCobro">
+      <implementation-class>webservices.WSCobro</implementation-class>
     </service>
   </services>
   <clients/>

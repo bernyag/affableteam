@@ -59,8 +59,9 @@ public class BooksFacade extends AbstractFacade<Books> {
     {
         em = getEntityManager();
         TypedQuery<Books> query = em.createNamedQuery("Books.holdStock", Books.class);
-        //query.setParameter("isbn", isbn);
-        //query.setParameter("units", units);          
+        query.setParameter("isbn", isbn);
+        query.setParameter("units", units);  
+        query.executeUpdate();
     }
     
 }

@@ -7,6 +7,7 @@ package pojotiendaelectronica;
 
 import java.math.BigDecimal;
 import webservices.Books;
+import webservices.Client;
 
 /**
  *
@@ -18,8 +19,8 @@ public class PojoTiendaElectronica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final int ISBN = 13;
-        final int UNITS = 0;
+        final int ISBN = 1;
+        final int UNITS = 3;
         Books b = findByIsbn(ISBN);
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
@@ -29,17 +30,11 @@ public class PojoTiendaElectronica {
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
         
-        
+        System.out.println(startPayment(1, 14, 1));
+        //System.out.println("Balance = "+getNewBalance(14,1,1));
         // Test WS Cobro
         
         
-        
-        
-        webservices.OrderBook ob = new webservices.OrderBook();
-        
-        BigDecimal balance = new BigDecimal(getNewBalance(1,2,1));
- 
-        System.out.println(""+balance);
     }
 
     private static Books findByIsbn(int isbn) {
@@ -53,11 +48,25 @@ public class PojoTiendaElectronica {
         webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.startOrder(isbn, units);
     }
+    
+    // WS Cobro
+    private static String startPayment(int idClt, int isbn, int units) {
+        webservices.WSCobro_Service service = new webservices.WSCobro_Service();
+        webservices.WSCobro port = service.getWSCobroPort();
+        return port.startPayment(idClt, isbn, units);
+    }
+
+    // WS Client
+
+    private static Client findClientById(int idClt) {
+        webservices.WsClient_Service service = new webservices.WsClient_Service();
+        webservices.WsClient port = service.getWsClientPort();
+        return port.findClientById(idClt);
+    }
 
     private static String getNewBalance(int isbn, int idCliente, int cantLibros) {
         webservices.WSCobro_Service service = new webservices.WSCobro_Service();
         webservices.WSCobro port = service.getWSCobroPort();
         return port.getNewBalance(isbn, idCliente, cantLibros);
     }
-    
 }

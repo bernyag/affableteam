@@ -36,7 +36,7 @@ public class OrderBookFacade extends AbstractFacade<OrderBook> {
     {
         BigDecimal res;
         em = getEntityManager();
-        Query query = em.createQuery("SELECT (c.balance-b.price*"+units+") FROM Client c, Books b  WHERE c.clientid=2 AND b.isbn = "+isbn);
+        Query query = em.createQuery("SELECT (c.balance-b.price*"+units+") FROM Client c, Books b  WHERE c.clientid="+clientId+" AND b.isbn = "+isbn);
         System.err.println(query.getResultList());
         java.util.List<BigDecimal> lista= query.getResultList();
         res = lista.get(0);
@@ -44,7 +44,7 @@ public class OrderBookFacade extends AbstractFacade<OrderBook> {
         return ""+res;
     }
     
-    public int updateBalance( int clientId, BigDecimal newBalance){
+    public int updateBalance( int clientId, String newBalance){
         em = getEntityManager();
         Query query = em.createQuery("UPDATE Client SET balance ="+newBalance+" WHERE clientid = "+clientId);
         System.err.println(query.executeUpdate());
@@ -54,16 +54,14 @@ public class OrderBookFacade extends AbstractFacade<OrderBook> {
     
     public int discountHold( int isbn, int units){
         em = getEntityManager();
-        Query query = em.createQuery("UPDATE Books SET unitsonhold =unitsonhold-"+units+" WHERE isbn = "+isbn);
-        //System.err.println(query.executeUpdate());
+        Query query = em.createQuery("UPDATE Books b SET b.unitsonhold = (b.unitsonhold-"+units+") WHERE b.isbn = "+isbn);
         
         return query.executeUpdate();
     }
     
     public int reStockHold( int isbn, int units){
         em = getEntityManager();
-        Query query = em.createQuery("UPDATE Books SET unitsavailable =unitsavailable+"+units+" WHERE isbn = "+isbn);
-        //System.err.println(query.executeUpdate());
+        Query query = em.createQuery("UPDATE Books b SET b.unitsavailable = (b.unitsavailable+"+units+") WHERE b.isbn = "+isbn);
         
         return query.executeUpdate();
     }

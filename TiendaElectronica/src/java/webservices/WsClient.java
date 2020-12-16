@@ -7,20 +7,21 @@ package webservices;
 
 import entities.Client;
 import facades.ClientFacade;
-import java.math.BigDecimal;
 import java.util.List;
 import javax.ejb.EJB;
+import javax.jws.WebService;
+import javax.ejb.Stateless;
 import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
-import javax.jws.WebService;
 
 /**
  *
- * @author santiagoborobia
+ * @author jaimelimonsamperio
  */
-@WebService(serviceName = "WSCliente")
-public class WSCliente {
+@WebService(serviceName = "WsClient")
+@Stateless()
+public class WsClient {
 
     @EJB
     private ClientFacade ejbRef;// Add business logic below. (Right-click in editor and choose
@@ -64,6 +65,17 @@ public class WSCliente {
         return ejbRef.count();
     }
 
+    /**
+     * Web service operation
+     * @param idClt
+     * @return 
+     */
+    @WebMethod(operationName = "findClientById")
+    public Client findClientById(@WebParam(name = "idClt") int idClt) {
+        
+        return ejbRef.findById(idClt);
+    }
+    
     
     
 }

@@ -1,7 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
+<<<<<<< HEAD
+    
+=======
+    
+>>>>>>> staging
+
+    
+    
+    
+    
+    
+    
+    
     <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL" uri="xml-resources/web-service-references/WSAlmacenService/wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.wsdl"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?xsd=1" uri="xml-resources/web-service-references/WSAlmacenService/wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WsClient/WsClient?WSDL" uri="xml-resources/web-service-references/WsClient/wsdl/localhost_8080/WsClient/WsClient.wsdl"/>
+    <system systemId="http://localhost:8080/WsClient/WsClient?xsd=1" uri="xml-resources/web-service-references/WsClient/wsdl/localhost_8080/WsClient/WsClient.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WSCobro?WSDL" uri="xml-resources/web-service-references/WSCobro/wsdl/localhost_8080/TiendaElectronica/WSCobro.wsdl"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WSCobro?xsd=1" uri="xml-resources/web-service-references/WSCobro/wsdl/localhost_8080/TiendaElectronica/WSCobro.xsd_1.xsd"/>
 </catalog>

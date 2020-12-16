@@ -13,6 +13,9 @@
     <service name="WsDeliveryOrder">
       <implementation-class>webservices.WsDeliveryOrder</implementation-class>
     </service>
+    <service name="WsDeliveryCompany">
+      <implementation-class>webservices.WsDeliveryCompany</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

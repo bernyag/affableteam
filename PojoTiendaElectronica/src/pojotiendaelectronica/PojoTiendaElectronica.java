@@ -5,7 +5,9 @@
  */
 package pojotiendaelectronica;
 
+import java.math.BigDecimal;
 import webservices.Books;
+import webservices.Client;
 
 /**
  *
@@ -27,6 +29,12 @@ public class PojoTiendaElectronica {
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
+        
+        System.out.println(startPayment(1, 1, 1));
+        //System.out.println("Balance = "+getNewBalance(14,1,1));
+        // Test WS Cobro
+        
+        
     }
 
     private static Books findByIsbn(int isbn) {
@@ -39,5 +47,26 @@ public class PojoTiendaElectronica {
         webservices.WSAlmacenService service = new webservices.WSAlmacenService();
         webservices.WSAlmacen port = service.getWSAlmacenPort();
         return port.startOrder(isbn, units);
+    }
+    
+    // WS Cobro
+    private static String startPayment(int idClt, int isbn, int units) {
+        webservices.WSCobro_Service service = new webservices.WSCobro_Service();
+        webservices.WSCobro port = service.getWSCobroPort();
+        return port.startPayment(idClt, isbn, units);
+    }
+
+    // WS Client
+
+    private static Client findClientById(int idClt) {
+        webservices.WsClient_Service service = new webservices.WsClient_Service();
+        webservices.WsClient port = service.getWsClientPort();
+        return port.findClientById(idClt);
+    }
+
+    private static String getNewBalance(int isbn, int idCliente, int cantLibros) {
+        webservices.WSCobro_Service service = new webservices.WSCobro_Service();
+        webservices.WSCobro port = service.getWSCobroPort();
+        return port.getNewBalance(isbn, idCliente, cantLibros);
     }
 }

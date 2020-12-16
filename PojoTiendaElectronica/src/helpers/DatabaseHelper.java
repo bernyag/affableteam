@@ -107,7 +107,8 @@ public class DatabaseHelper {
         System.out.println("Seeding database...");
         String[] inserts = {
             "INSERT INTO books (unitsAvailable,unitsOnHold,price) " 
-                + "VALUES (100,0,399.00)"
+                + "VALUES (100,0,399.00)",
+            "INSERT into client (balance) VALUES (2000)"
         };
         for (String query : inserts) {
             executeStatement(query);

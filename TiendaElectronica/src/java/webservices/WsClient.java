@@ -64,5 +64,18 @@ public class WsClient {
     public int count() {
         return ejbRef.count();
     }
+
+    /**
+     * Web service operation
+     * @param idClt
+     * @return 
+     */
+    @WebMethod(operationName = "findClientById")
+    public Client findClientById(@WebParam(name = "idClt") int idClt) {
+        
+        return ejbRef.findById(idClt);
+    }
+    
+    
     
 }

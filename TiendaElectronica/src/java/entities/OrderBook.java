@@ -36,7 +36,8 @@ import javax.xml.bind.annotation.XmlTransient;
     @NamedQuery(name = "OrderBook.findAll", query = "SELECT o FROM OrderBook o")
     , @NamedQuery(name = "OrderBook.findByOrderid", query = "SELECT o FROM OrderBook o WHERE o.orderid = :orderid")
     , @NamedQuery(name = "OrderBook.findByUnitsordered", query = "SELECT o FROM OrderBook o WHERE o.unitsordered = :unitsordered")
-    , @NamedQuery(name = "OrderBook.findByFinalcost", query = "SELECT o FROM OrderBook o WHERE o.finalcost = :finalcost")})
+    , @NamedQuery(name = "OrderBook.findByFinalcost", query = "SELECT o FROM OrderBook o WHERE o.finalcost = :finalcost")
+})
 public class OrderBook implements Serializable {
 
     private static final long serialVersionUID = 1L;

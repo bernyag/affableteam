@@ -17,8 +17,8 @@ public class PojoTiendaElectronica {
      * @param args the command line arguments
      */
     public static void main(String[] args) {
-        final int ISBN = 13;
-        final int UNITS = 0;
+        final int ISBN = 1;
+        final int UNITS = 3;
         Books b = findByIsbn(ISBN);
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());

@@ -57,15 +57,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="find">
+<xs:complexType name="findRange">
 <xs:sequence>
-<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findResponse">
+<xs:complexType name="findRangeResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:client" minOccurs="0"/>
+<xs:element name="return" type="tns:client" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -76,15 +76,15 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findRange">
+<xs:complexType name="find">
 <xs:sequence>
-<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findRangeResponse">
+<xs:complexType name="findResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:client" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="tns:client" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -110,12 +110,6 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="remove">
-<xs:sequence>
-<xs:element name="entity" type="tns:client" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
 <xs:complexType name="getNewBalance">
 <xs:sequence>
 <xs:element name="isbn" type="xs:int"/>
@@ -127,6 +121,12 @@
 <xs:complexType name="getNewBalanceResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="remove">
+<xs:sequence>
+<xs:element name="entity" type="tns:client" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 

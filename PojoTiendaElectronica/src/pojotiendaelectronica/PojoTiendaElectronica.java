@@ -30,9 +30,10 @@ public class PojoTiendaElectronica {
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
         
-        System.out.println(startPayment(1, 1, 1));
-        //System.out.println("Balance = "+getNewBalance(14,1,1));
         // Test WS Cobro
+        System.out.println(startPayment(1, 1, 3));
+        
+        
         
         
     }
@@ -64,9 +65,4 @@ public class PojoTiendaElectronica {
         return port.findClientById(idClt);
     }
 
-    private static String getNewBalance(int isbn, int idCliente, int cantLibros) {
-        webservices.WSCobro_Service service = new webservices.WSCobro_Service();
-        webservices.WSCobro port = service.getWSCobroPort();
-        return port.getNewBalance(isbn, idCliente, cantLibros);
-    }
 }

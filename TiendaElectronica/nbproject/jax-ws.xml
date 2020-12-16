@@ -10,6 +10,9 @@
     <service name="WSCobro">
       <implementation-class>webservices.WSCobro</implementation-class>
     </service>
+    <service name="WsDeliveryOrder">
+      <implementation-class>webservices.WsDeliveryOrder</implementation-class>
+    </service>
   </services>
   <clients/>
 </jax-ws>

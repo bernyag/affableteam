@@ -114,39 +114,49 @@ public class WSCobro {
     public String startPayment(@WebParam(name = "idClt") int idClt, @WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
         String res = "";
         if (Integer.toString(isbn).length() >= 1) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
-            String balance = getNewBalance(isbn, units, idClt);
-            double bal = Double.parseDouble(balance);
-            
-            System.out.println("Balance "+balance+" = "+bal);
-            if(units >= 1){
-                Books bk = ejbRef2.findByIsbn(isbn);
-                BigDecimal monto = bk.getPrice();
-                if(bal>=0){ //Check if the client has enough credits to proceed with the purchase
+            Books bk = ejbRef2.findByIsbn(isbn);
+            if(bk.getIsbn()!= -1){
+                if(units >= 1){
                     Client clt = ejbRefClient.findById(idClt);
-                    
-                    BigDecimal uds = new BigDecimal(units);
-                    monto = monto.multiply(uds);
-                    
-                    updateBalance(idClt, balance); //Charges the client
-                    discountHold(isbn, units); //discounts the previously hold books
-                  
-                    
-                    OrderBook ob = new OrderBook();
-                    ob.setClientid(clt);
-                    ob.setIsbn(bk);
-                    ob.setFinalcost(monto);
-                    ob.setUnitsordered(units);
-                    create(ob);
-                    
-                    res = "An order has been created for the book with ISBN = " + isbn + "."
-                                    + "\n\t A new invoice has been created with value = INVOICE_"+ob.getOrderid() ;
+                    if(clt.getClientid()!=-1){
+                        String balance = getNewBalance(isbn, idClt, units);
+                        double bal = Double.parseDouble(balance);
+                        BigDecimal monto = bk.getPrice();  
+                        BigDecimal uds = new BigDecimal(units);
+                        monto = monto.multiply(uds);
+                        
+                        if(bal>=0){ //Check if the client has enough credits to proceed with the purchase
+                            updateBalance(idClt, balance); //Charges the client
+                            discountHold(isbn, units); //Discounts the previously held books
+
+                            OrderBook ob = new OrderBook(); //Insert new order in table OrderBook
+                            ob.setClientid(clt);
+                            ob.setIsbn(bk);
+                            ob.setFinalcost(monto);
+                            ob.setUnitsordered(units);
+                            create(ob);
+
+                            res = "An order has been created for the book with ISBN = " + isbn + "."
+                                            + "\n\t A new invoice has been created with value = INV"+ob.getOrderid()
+                                            + "\n\t Client "+idClt+" new balance is $"+balance ;
+                        }
+                        else{ // The client hasn't enough credits
+                            discountHold(isbn, units); //discounts the previously hold books
+                            reStockHold(isbn, units);
+                            res = "There are unsufficient credits in the client's account to complete the purchase. The total amount is $"+monto+", but the client has $"+clt.getBalance();
+                        }
+                    }else{
+                        res = "The client with ClientId = "+idClt+" is not registered in the database. Please try with another ClientId";
+                    }
                 }
-                else{ // The client hasn't enough credits
-                    discountHold(isbn, units); //discounts the previously hold books
-                    reStockHold(isbn, units);
-                    res = "There are unsufficient credits in the client's account to complete the purchase. The total amount is $"+monto+", but the client has $"+monto.add(new BigDecimal(bal));
+                else{
+                    res = "Please, enter a number of units bigger than 0";
                 }
+            } else{
+                res = "The booh with ISBN ="+isbn+" is not registered in the database. Please try with another ISBN.";
             }
+        }else{
+            res = "Please enter an ISBN with length of 13 digits.";
         }
         return res;
     }

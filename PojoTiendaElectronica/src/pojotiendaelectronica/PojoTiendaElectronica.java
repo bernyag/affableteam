@@ -30,7 +30,7 @@ public class PojoTiendaElectronica {
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
         
-        System.out.println(startPayment(1, 14, 1));
+        System.out.println(startPayment(1, 1, 1));
         //System.out.println("Balance = "+getNewBalance(14,1,1));
         // Test WS Cobro
         

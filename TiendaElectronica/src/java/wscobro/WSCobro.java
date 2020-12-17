@@ -119,7 +119,7 @@ public class WSCobro {
      * @return 
      */
     @WebMethod(operationName = "newOrderBook")
-    public String newOrderBook(@WebParam(name = "idClient") int idClient, @WebParam(name = "Book") Books Book, @WebParam(name = "monto") BigDecimal monto, @WebParam(name = "units") int units) {
+    public int newOrderBook(@WebParam(name = "idClient") int idClient, @WebParam(name = "Book") Books Book, @WebParam(name = "monto") BigDecimal monto, @WebParam(name = "units") int units) {
  
         OrderBook ob = new OrderBook(); //Insert new order in table OrderBook
         Client c = ejbRefClient.findById(idClient);
@@ -128,17 +128,23 @@ public class WSCobro {
         ob.setFinalcost(monto);
         ob.setUnitsordered(units);
         create(ob);
-        String res = "A new invoice has been created with value = INV"+ob.getOrderid()
-                                            + "\n\t Client "+idClient+" new balance is $"+c.getBalance();
-        return res;
+        System.out.println("A new invoice has been created with value = INV"+ob.getOrderid()
+                                            + "\n\t Client "+idClient+" new balance is $"+c.getBalance());
+        return ob.getOrderid();
     }
     
     /**
      * Web service operation
+     * @param idClt
+     * @param isbn
+     * @param units
+     * @return 
+     * @throws java.lang.Exception
      */
     @WebMethod(operationName = "startPayment")
-    public String startPayment(@WebParam(name = "idClt") int idClt, @WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
-        String res = "";
+    public int startPayment(@WebParam(name = "idClt") int idClt, @WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) throws Exception{
+        String res;
+        int orderId = -1;
         if (Integer.toString(isbn).length() >= 1) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
             Books bk = ejbRef2.findByIsbn(isbn);
             if(bk.getIsbn()!= -1){
@@ -154,27 +160,32 @@ public class WSCobro {
                         if(bal>=0){ //Check if the client has enough credits to proceed with the purchase
                             updateBalance(idClt, balance); //Charges the client
                             discountHold(isbn, units); //Discounts the previously held books
-                            res = newOrderBook(idClt, bk, monto, units);
+                            orderId = newOrderBook(idClt, bk, monto, units);
                         }
                         else{ // The client hasn't enough credits
                             discountHold(isbn, units); //discounts the previously hold books
                             reStockHold(isbn, units);
                             res = "There are unsufficient credits in the client's account to complete the purchase. The total amount is $"+monto+", but the client has $"+clt.getBalance();
+                            throw new Exception(res);
                         }
                     }else{
                         res = "The client with ClientId = "+idClt+" is not registered in the database. Please try with another ClientId";
+                        throw new Exception(res);
                     }
                 }
                 else{
                     res = "Please, enter a number of units bigger than 0";
+                    throw new Exception(res);
                 }
             } else{
                 res = "The booh with ISBN ="+isbn+" is not registered in the database. Please try with another ISBN.";
+                throw new Exception(res);
             }
         }else{
             res = "Please enter an ISBN with length of 13 digits.";
+            throw new Exception(res);
         }
-        return res;
+        return orderId;
     }
 
     

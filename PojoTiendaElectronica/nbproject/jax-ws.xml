@@ -5,7 +5,7 @@
     <client name="WSAlmacenService">
       <wsdl-url>http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL</wsdl-url>
       <local-wsdl-file>localhost_8080/TiendaElectronica/WSAlmacenService.wsdl</local-wsdl-file>
-      <package-name>wsalmacen</package-name>
+      <package-name>webservices</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -23,38 +23,6 @@
         <wsimport-option>
           <wsimport-option-name>wsdlLocation</wsimport-option-name>
           <wsimport-option-value>http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xnocompile</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>xendorsed</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-      </wsimport-options>
-    </client>
-    <client name="WsClient">
-      <wsdl-url>http://localhost:8080/WsClient/WsClient?WSDL</wsdl-url>
-      <local-wsdl-file>localhost_8080/WsClient/WsClient.wsdl</local-wsdl-file>
-      <package-name>wsclient</package-name>
-      <catalog-file>catalog.xml</catalog-file>
-      <wsimport-options>
-        <wsimport-option>
-          <wsimport-option-name>extension</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>verbose</wsimport-option-name>
-          <wsimport-option-value>true</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>fork</wsimport-option-name>
-          <wsimport-option-value>false</wsimport-option-value>
-        </wsimport-option>
-        <wsimport-option>
-          <wsimport-option-name>wsdlLocation</wsimport-option-name>
-          <wsimport-option-value>http://localhost:8080/WsClient/WsClient?WSDL</wsimport-option-value>
         </wsimport-option>
         <wsimport-option>
           <wsimport-option-name>xnocompile</wsimport-option-name>
@@ -98,10 +66,42 @@
         </wsimport-option>
       </wsimport-options>
     </client>
+    <client name="WsClient">
+      <wsdl-url>http://localhost:8080/WsClient/WsClient?WSDL</wsdl-url>
+      <local-wsdl-file>localhost_8080/WsClient/WsClient.wsdl</local-wsdl-file>
+      <package-name>webservices</package-name>
+      <catalog-file>catalog.xml</catalog-file>
+      <wsimport-options>
+        <wsimport-option>
+          <wsimport-option-name>extension</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>verbose</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>fork</wsimport-option-name>
+          <wsimport-option-value>false</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>wsdlLocation</wsimport-option-name>
+          <wsimport-option-value>http://localhost:8080/WsClient/WsClient?WSDL</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xnocompile</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>xendorsed</wsimport-option-name>
+          <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+      </wsimport-options>
+    </client>
     <client name="WsDeliveryCompany">
       <wsdl-url>http://localhost:8080/TiendaElectronica/WsDeliveryCompany?WSDL</wsdl-url>
       <local-wsdl-file>localhost_8080/TiendaElectronica/WsDeliveryCompany.wsdl</local-wsdl-file>
-      <package-name>wsdeliverycompany</package-name>
+      <package-name forceReplace="true">wsdeliverycompany</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -128,12 +128,16 @@
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
         </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>wsdeliverycompany</wsimport-option-value>
+        </wsimport-option>
       </wsimport-options>
     </client>
     <client name="WsDeliveryOrder">
       <wsdl-url>http://localhost:8080/TiendaElectronica/WsDeliveryOrder?WSDL</wsdl-url>
       <local-wsdl-file>localhost_8080/TiendaElectronica/WsDeliveryOrder.wsdl</local-wsdl-file>
-      <package-name>wsdeliveryorder</package-name>
+      <package-name forceReplace="true">wsdeliveryorder</package-name>
       <catalog-file>catalog.xml</catalog-file>
       <wsimport-options>
         <wsimport-option>
@@ -159,6 +163,10 @@
         <wsimport-option>
           <wsimport-option-name>xendorsed</wsimport-option-name>
           <wsimport-option-value>true</wsimport-option-value>
+        </wsimport-option>
+        <wsimport-option>
+          <wsimport-option-name>package</wsimport-option-name>
+          <wsimport-option-value>wsdeliveryorder</wsimport-option-value>
         </wsimport-option>
       </wsimport-options>
     </client>

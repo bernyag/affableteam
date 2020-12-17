@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
-    <service name="WSAlmacen">
-      <implementation-class>wsalmacen.WSAlmacen</implementation-class>
-    </service>
     <service name="WsClient">
       <implementation-class>wsclient.WsClient</implementation-class>
     </service>
-    <service name="WSCobro">
-      <implementation-class>wscobro.WSCobro</implementation-class>
-    </service>
     <service name="WsDeliveryCompany">
       <implementation-class>wsdeliverycompany.WsDeliveryCompany</implementation-class>
+    </service>
+    <service name="WSAlmacen">
+      <implementation-class>wsalmacen.WSAlmacen</implementation-class>
+    </service>
+    <service name="WSCobro">
+      <implementation-class>wscobro.WSCobro</implementation-class>
     </service>
     <service name="WsDeliveryOrder">
       <implementation-class>wsdeliveryorder.WsDeliveryOrder</implementation-class>

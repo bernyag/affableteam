@@ -6,8 +6,10 @@
 package pojotiendaelectronica;
 
 import java.math.BigDecimal;
-import webservices.Books;
-import webservices.Client;
+import wsalmacen.Books;
+import wsclient.Client;
+import wsdeliverycompany.DeliveryCompany;
+import wsdeliveryorder.DeliveryOrder;
 
 /**
  *
@@ -33,36 +35,61 @@ public class PojoTiendaElectronica {
         // Test WS Cobro
         System.out.println(startPayment(1, ISBN, UNITS));
         
+        // TODO: startPayment method should return orderId
         
+        // Create a new delivery company
+        DeliveryCompany company = new DeliveryCompany();
+        company.setName("Super delivery company");
+        company.setIddelivery(1);
         
+        // Get company id after creation
+        int companyId = (int)createDeliveryCompany(company);
+        System.out.println("Company id: " + companyId);
+        
+        // Create delivery order getting delivery estimate
+        // TODO: Use orderId returned from startPayment
+        int deliveryEstimate = createDeliverOrder(companyId, 1);
+        System.out.println("Estimated delivery in days: " + deliveryEstimate);
         
     }
 
     private static Books findByIsbn(int isbn) {
-        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
-        webservices.WSAlmacen port = service.getWSAlmacenPort();
+        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
+        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
         return port.findByIsbn(isbn);
     }
 
     private static String startOrder(int isbn, int units) {
-        webservices.WSAlmacenService service = new webservices.WSAlmacenService();
-        webservices.WSAlmacen port = service.getWSAlmacenPort();
+        wsalmacen.WSAlmacenService service = new wsalmacen.WSAlmacenService();
+        wsalmacen.WSAlmacen port = service.getWSAlmacenPort();
         return port.startOrder(isbn, units);
     }
     
     // WS Cobro
     private static String startPayment(int idClt, int isbn, int units) {
-        webservices.WSCobro_Service service = new webservices.WSCobro_Service();
-        webservices.WSCobro port = service.getWSCobroPort();
+        wscobro.WSCobro_Service service = new wscobro.WSCobro_Service();
+        wscobro.WSCobro port = service.getWSCobroPort();
         return port.startPayment(idClt, isbn, units);
     }
 
     // WS Client
 
     private static Client findClientById(int idClt) {
-        webservices.WsClient_Service service = new webservices.WsClient_Service();
-        webservices.WsClient port = service.getWsClientPort();
+        wsclient.WsClient_Service service = new wsclient.WsClient_Service();
+        wsclient.WsClient port = service.getWsClientPort();
         return port.findClientById(idClt);
+    }
+
+    private static long createDeliveryCompany(wsdeliverycompany.DeliveryCompany entity) {
+        wsdeliverycompany.WsDeliveryCompany_Service service = new wsdeliverycompany.WsDeliveryCompany_Service();
+        wsdeliverycompany.WsDeliveryCompany port = service.getWsDeliveryCompanyPort();
+        return port.create(entity);
+    }
+
+    private static int createDeliverOrder(int idEmpresa, int idPedido) {
+        wsdeliveryorder.WsDeliveryOrder_Service service = new wsdeliveryorder.WsDeliveryOrder_Service();
+        wsdeliveryorder.WsDeliveryOrder port = service.getWsDeliveryOrderPort();
+        return port.deliverOrder(idEmpresa, idPedido);
     }
 
 }

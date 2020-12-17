@@ -1,4 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://webservices/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://webservices/">
+<?xml version='1.0' encoding='UTF-8'?><!-- Published by JAX-WS RI (http://jax-ws.java.net). RI's version is Metro/2.3.2-b608 (trunk-7979; 2015-01-21T12:50:19+0000) JAXWS-RI/2.2.11-b150120.1832 JAXWS-API/2.2.12 JAXB-RI/2.2.12-b141219.1637 JAXB-API/2.2.13-b141020.1521 svn-revision#unknown. --><xs:schema xmlns:tns="http://wscobro/" xmlns:xs="http://www.w3.org/2001/XMLSchema" version="1.0" targetNamespace="http://wscobro/">
 
 <xs:element name="books" type="tns:books"/>
 
@@ -36,6 +36,8 @@
 
 <xs:element name="newOrderBookResponse" type="tns:newOrderBookResponse"/>
 
+<xs:element name="orderBook" type="tns:orderBook"/>
+
 <xs:element name="reStockHold" type="tns:reStockHold"/>
 
 <xs:element name="reStockHoldResponse" type="tns:reStockHoldResponse"/>
@@ -50,52 +52,19 @@
 
 <xs:element name="updateBalanceResponse" type="tns:updateBalanceResponse"/>
 
-<xs:complexType name="reStockHold">
+<xs:complexType name="create">
 <xs:sequence>
-<xs:element name="isbn" type="xs:int"/>
-<xs:element name="units" type="xs:int"/>
+<xs:element name="entity" type="tns:orderBook" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="reStockHoldResponse">
+<xs:complexType name="orderBook">
 <xs:sequence>
-<xs:element name="return" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="newOrderBook">
-<xs:sequence>
-<xs:element name="idClient" type="xs:int"/>
-<xs:element name="Book" type="tns:books" minOccurs="0"/>
-<xs:element name="monto" type="xs:decimal" minOccurs="0"/>
-<xs:element name="units" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="books">
-<xs:sequence>
-<xs:element name="isbn" type="xs:int" minOccurs="0"/>
-<xs:element name="price" type="xs:decimal" minOccurs="0"/>
-<xs:element name="unitsavailable" type="xs:int"/>
-<xs:element name="unitsonhold" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="newOrderBookResponse">
-<xs:sequence>
-<xs:element name="return" type="xs:string" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="find">
-<xs:sequence>
-<xs:element name="id" type="xs:anyType" minOccurs="0"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:client" minOccurs="0"/>
+<xs:element name="clientid" type="tns:client" minOccurs="0"/>
+<xs:element name="finalcost" type="xs:decimal" minOccurs="0"/>
+<xs:element name="isbn" type="tns:books" minOccurs="0"/>
+<xs:element name="orderid" type="xs:int" minOccurs="0"/>
+<xs:element name="unitsordered" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -106,9 +75,12 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="create">
+<xs:complexType name="books">
 <xs:sequence>
-<xs:element name="entity" type="tns:client" minOccurs="0"/>
+<xs:element name="isbn" type="xs:int" minOccurs="0"/>
+<xs:element name="price" type="xs:decimal" minOccurs="0"/>
+<xs:element name="unitsavailable" type="xs:int"/>
+<xs:element name="unitsonhold" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -139,21 +111,43 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findRange">
+<xs:complexType name="reStockHold">
 <xs:sequence>
-<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="isbn" type="xs:int"/>
+<xs:element name="units" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="findRangeResponse">
+<xs:complexType name="reStockHoldResponse">
 <xs:sequence>
-<xs:element name="return" type="tns:client" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="xs:int"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="edit">
+<xs:complexType name="newOrderBook">
 <xs:sequence>
-<xs:element name="entity" type="tns:client" minOccurs="0"/>
+<xs:element name="idClient" type="xs:int"/>
+<xs:element name="Book" type="tns:books" minOccurs="0"/>
+<xs:element name="monto" type="xs:decimal" minOccurs="0"/>
+<xs:element name="units" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="newOrderBookResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="find">
+<xs:sequence>
+<xs:element name="id" type="xs:anyType" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:orderBook" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -164,6 +158,35 @@
 <xs:complexType name="countResponse">
 <xs:sequence>
 <xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="findAll">
+<xs:sequence/>
+</xs:complexType>
+
+<xs:complexType name="findAllResponse">
+<xs:sequence>
+<xs:element name="return" type="tns:orderBook" minOccurs="0" maxOccurs="unbounded"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateBalance">
+<xs:sequence>
+<xs:element name="idClte" type="xs:int"/>
+<xs:element name="newBalance" type="xs:string" minOccurs="0"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="updateBalanceResponse">
+<xs:sequence>
+<xs:element name="return" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+
+<xs:complexType name="remove">
+<xs:sequence>
+<xs:element name="entity" type="tns:orderBook" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
@@ -181,32 +204,21 @@
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="remove">
+<xs:complexType name="edit">
 <xs:sequence>
-<xs:element name="entity" type="tns:client" minOccurs="0"/>
+<xs:element name="entity" type="tns:orderBook" minOccurs="0"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="updateBalance">
+<xs:complexType name="findRange">
 <xs:sequence>
-<xs:element name="idClte" type="xs:int"/>
-<xs:element name="newBalance" type="xs:string" minOccurs="0"/>
+<xs:element name="range" type="xs:int" nillable="true" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 
-<xs:complexType name="updateBalanceResponse">
+<xs:complexType name="findRangeResponse">
 <xs:sequence>
-<xs:element name="return" type="xs:int"/>
-</xs:sequence>
-</xs:complexType>
-
-<xs:complexType name="findAll">
-<xs:sequence/>
-</xs:complexType>
-
-<xs:complexType name="findAllResponse">
-<xs:sequence>
-<xs:element name="return" type="tns:client" minOccurs="0" maxOccurs="unbounded"/>
+<xs:element name="return" type="tns:orderBook" minOccurs="0" maxOccurs="unbounded"/>
 </xs:sequence>
 </xs:complexType>
 </xs:schema>

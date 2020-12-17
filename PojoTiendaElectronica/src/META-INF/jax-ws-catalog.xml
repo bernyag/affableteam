@@ -1,12 +1,31 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <catalog xmlns="urn:oasis:names:tc:entity:xmlns:xml:catalog" prefer="system">
-    <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.wsdl"/>
-    <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.xsd_1.xsd"/>
 <<<<<<< HEAD
-    <system systemId="http://localhost:8080/TiendaElectronica/WSCobro?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WSCobro.wsdl"/>
-    <system systemId="http://localhost:8080/TiendaElectronica/WSCobro?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WSCobro.xsd_1.xsd"/>
+    
 =======
+    
+>>>>>>> staging
+
+    
+    
+    
+    
+    
+    
+    
+    
     <system systemId="http://localhost:8080/WsClient/WsClient?WSDL" uri="wsdl/localhost_8080/WsClient/WsClient.wsdl"/>
     <system systemId="http://localhost:8080/WsClient/WsClient?xsd=1" uri="wsdl/localhost_8080/WsClient/WsClient.xsd_1.xsd"/>
->>>>>>> staging
+    <system systemId="http://localhost:8080/TiendaElectronica/WSCobro?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WSCobro.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WSCobro?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WSCobro.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WsDeliveryCompany/WsDeliveryCompany?WSDL" uri="wsdl/localhost_8080/WsDeliveryCompany/WsDeliveryCompany.wsdl"/>
+    <system systemId="http://localhost:8080/WsDeliveryCompany/WsDeliveryCompany?xsd=1" uri="wsdl/localhost_8080/WsDeliveryCompany/WsDeliveryCompany.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/WsDeliveryOrder/WsDeliveryOrder?WSDL" uri="wsdl/localhost_8080/WsDeliveryOrder/WsDeliveryOrder.wsdl"/>
+    <system systemId="http://localhost:8080/WsDeliveryOrder/WsDeliveryOrder?xsd=1" uri="wsdl/localhost_8080/WsDeliveryOrder/WsDeliveryOrder.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryCompany?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryCompany.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryCompany?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryCompany.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryOrder?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryOrder.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryOrder?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryOrder.xsd_1.xsd"/>
 </catalog>

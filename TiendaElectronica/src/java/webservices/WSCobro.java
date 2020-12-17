@@ -73,11 +73,14 @@ public class WSCobro {
 
     /**
      * Web service operation
+     * @param isbn
+     * @param idCliente
+     * @param cantLibros
+     * @return 
      */
     @WebMethod(operationName = "getNewBalance")
     public String getNewBalance(@WebParam(name = "isbn") int isbn, @WebParam(name = "idCliente") int idCliente, @WebParam(name = "cantLibros") int cantLibros) {
-        String res;
-        res = ejbRef.getNewBalance(isbn, cantLibros, idCliente);
+        String res = ejbRef.getNewBalance(isbn, cantLibros, idCliente);
         return res;
     }
 
@@ -109,6 +112,29 @@ public class WSCobro {
     
     /**
      * Web service operation
+     * @param idClient
+     * @param Book
+     * @param monto
+     * @param units
+     * @return 
+     */
+    @WebMethod(operationName = "newOrderBook")
+    public String newOrderBook(@WebParam(name = "idClient") int idClient, @WebParam(name = "Book") Books Book, @WebParam(name = "monto") BigDecimal monto, @WebParam(name = "units") int units) {
+ 
+        OrderBook ob = new OrderBook(); //Insert new order in table OrderBook
+        Client c = ejbRefClient.findById(idClient);
+        ob.setClientid(c);
+        ob.setIsbn(Book);
+        ob.setFinalcost(monto);
+        ob.setUnitsordered(units);
+        create(ob);
+        String res = "A new invoice has been created with value = INV"+ob.getOrderid()
+                                            + "\n\t Client "+idClient+" new balance is $"+c.getBalance();
+        return res;
+    }
+    
+    /**
+     * Web service operation
      */
     @WebMethod(operationName = "startPayment")
     public String startPayment(@WebParam(name = "idClt") int idClt, @WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
@@ -128,17 +154,7 @@ public class WSCobro {
                         if(bal>=0){ //Check if the client has enough credits to proceed with the purchase
                             updateBalance(idClt, balance); //Charges the client
                             discountHold(isbn, units); //Discounts the previously held books
-
-                            OrderBook ob = new OrderBook(); //Insert new order in table OrderBook
-                            ob.setClientid(clt);
-                            ob.setIsbn(bk);
-                            ob.setFinalcost(monto);
-                            ob.setUnitsordered(units);
-                            create(ob);
-
-                            res = "An order has been created for the book with ISBN = " + isbn + "."
-                                            + "\n\t A new invoice has been created with value = INV"+ob.getOrderid()
-                                            + "\n\t Client "+idClt+" new balance is $"+balance ;
+                            res = newOrderBook(idClt, bk, monto, units);
                         }
                         else{ // The client hasn't enough credits
                             discountHold(isbn, units); //discounts the previously hold books
@@ -160,5 +176,6 @@ public class WSCobro {
         }
         return res;
     }
+
     
 }

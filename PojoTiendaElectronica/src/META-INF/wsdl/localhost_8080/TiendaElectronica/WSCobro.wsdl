@@ -4,32 +4,23 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/TiendaElectronica/WSCobro?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="findAll">
-<part name="parameters" element="tns:findAll"/>
+<message name="remove">
+<part name="parameters" element="tns:remove"/>
 </message>
-<message name="findAllResponse">
-<part name="parameters" element="tns:findAllResponse"/>
+<message name="count">
+<part name="parameters" element="tns:count"/>
 </message>
-<message name="edit">
-<part name="parameters" element="tns:edit"/>
+<message name="countResponse">
+<part name="parameters" element="tns:countResponse"/>
 </message>
-<message name="findRange">
-<part name="parameters" element="tns:findRange"/>
+<message name="find">
+<part name="parameters" element="tns:find"/>
 </message>
-<message name="findRangeResponse">
-<part name="parameters" element="tns:findRangeResponse"/>
+<message name="findResponse">
+<part name="parameters" element="tns:findResponse"/>
 </message>
-<message name="getNewBalance">
-<part name="parameters" element="tns:getNewBalance"/>
-</message>
-<message name="getNewBalanceResponse">
-<part name="parameters" element="tns:getNewBalanceResponse"/>
-</message>
-<message name="updateBalance">
-<part name="parameters" element="tns:updateBalance"/>
-</message>
-<message name="updateBalanceResponse">
-<part name="parameters" element="tns:updateBalanceResponse"/>
+<message name="create">
+<part name="parameters" element="tns:create"/>
 </message>
 <message name="discountHold">
 <part name="parameters" element="tns:discountHold"/>
@@ -49,56 +40,34 @@
 <message name="startPaymentResponse">
 <part name="parameters" element="tns:startPaymentResponse"/>
 </message>
-<message name="remove">
-<part name="parameters" element="tns:remove"/>
+<message name="updateBalance">
+<part name="parameters" element="tns:updateBalance"/>
 </message>
-<message name="count">
-<part name="parameters" element="tns:count"/>
+<message name="updateBalanceResponse">
+<part name="parameters" element="tns:updateBalanceResponse"/>
 </message>
-<message name="countResponse">
-<part name="parameters" element="tns:countResponse"/>
+<message name="getNewBalance">
+<part name="parameters" element="tns:getNewBalance"/>
 </message>
-<message name="find">
-<part name="parameters" element="tns:find"/>
+<message name="getNewBalanceResponse">
+<part name="parameters" element="tns:getNewBalanceResponse"/>
 </message>
-<message name="findResponse">
-<part name="parameters" element="tns:findResponse"/>
+<message name="findAll">
+<part name="parameters" element="tns:findAll"/>
 </message>
-<message name="create">
-<part name="parameters" element="tns:create"/>
+<message name="findAllResponse">
+<part name="parameters" element="tns:findAllResponse"/>
+</message>
+<message name="findRange">
+<part name="parameters" element="tns:findRange"/>
+</message>
+<message name="findRangeResponse">
+<part name="parameters" element="tns:findRangeResponse"/>
+</message>
+<message name="edit">
+<part name="parameters" element="tns:edit"/>
 </message>
 <portType name="WSCobro">
-<operation name="findAll">
-<input wsam:Action="http://webservices/WSCobro/findAllRequest" message="tns:findAll"/>
-<output wsam:Action="http://webservices/WSCobro/findAllResponse" message="tns:findAllResponse"/>
-</operation>
-<operation name="edit">
-<input wsam:Action="http://webservices/WSCobro/edit" message="tns:edit"/>
-</operation>
-<operation name="findRange">
-<input wsam:Action="http://webservices/WSCobro/findRangeRequest" message="tns:findRange"/>
-<output wsam:Action="http://webservices/WSCobro/findRangeResponse" message="tns:findRangeResponse"/>
-</operation>
-<operation name="getNewBalance">
-<input wsam:Action="http://webservices/WSCobro/getNewBalanceRequest" message="tns:getNewBalance"/>
-<output wsam:Action="http://webservices/WSCobro/getNewBalanceResponse" message="tns:getNewBalanceResponse"/>
-</operation>
-<operation name="updateBalance">
-<input wsam:Action="http://webservices/WSCobro/updateBalanceRequest" message="tns:updateBalance"/>
-<output wsam:Action="http://webservices/WSCobro/updateBalanceResponse" message="tns:updateBalanceResponse"/>
-</operation>
-<operation name="discountHold">
-<input wsam:Action="http://webservices/WSCobro/discountHoldRequest" message="tns:discountHold"/>
-<output wsam:Action="http://webservices/WSCobro/discountHoldResponse" message="tns:discountHoldResponse"/>
-</operation>
-<operation name="reStockHold">
-<input wsam:Action="http://webservices/WSCobro/reStockHoldRequest" message="tns:reStockHold"/>
-<output wsam:Action="http://webservices/WSCobro/reStockHoldResponse" message="tns:reStockHoldResponse"/>
-</operation>
-<operation name="startPayment">
-<input wsam:Action="http://webservices/WSCobro/startPaymentRequest" message="tns:startPayment"/>
-<output wsam:Action="http://webservices/WSCobro/startPaymentResponse" message="tns:startPaymentResponse"/>
-</operation>
 <operation name="remove">
 <input wsam:Action="http://webservices/WSCobro/remove" message="tns:remove"/>
 </operation>
@@ -113,10 +82,47 @@
 <operation name="create">
 <input wsam:Action="http://webservices/WSCobro/create" message="tns:create"/>
 </operation>
+<operation name="discountHold">
+<input wsam:Action="http://webservices/WSCobro/discountHoldRequest" message="tns:discountHold"/>
+<output wsam:Action="http://webservices/WSCobro/discountHoldResponse" message="tns:discountHoldResponse"/>
+</operation>
+<operation name="reStockHold">
+<input wsam:Action="http://webservices/WSCobro/reStockHoldRequest" message="tns:reStockHold"/>
+<output wsam:Action="http://webservices/WSCobro/reStockHoldResponse" message="tns:reStockHoldResponse"/>
+</operation>
+<operation name="startPayment">
+<input wsam:Action="http://webservices/WSCobro/startPaymentRequest" message="tns:startPayment"/>
+<output wsam:Action="http://webservices/WSCobro/startPaymentResponse" message="tns:startPaymentResponse"/>
+</operation>
+<operation name="updateBalance">
+<input wsam:Action="http://webservices/WSCobro/updateBalanceRequest" message="tns:updateBalance"/>
+<output wsam:Action="http://webservices/WSCobro/updateBalanceResponse" message="tns:updateBalanceResponse"/>
+</operation>
+<operation name="getNewBalance">
+<input wsam:Action="http://webservices/WSCobro/getNewBalanceRequest" message="tns:getNewBalance"/>
+<output wsam:Action="http://webservices/WSCobro/getNewBalanceResponse" message="tns:getNewBalanceResponse"/>
+</operation>
+<operation name="findAll">
+<input wsam:Action="http://webservices/WSCobro/findAllRequest" message="tns:findAll"/>
+<output wsam:Action="http://webservices/WSCobro/findAllResponse" message="tns:findAllResponse"/>
+</operation>
+<operation name="findRange">
+<input wsam:Action="http://webservices/WSCobro/findRangeRequest" message="tns:findRange"/>
+<output wsam:Action="http://webservices/WSCobro/findRangeResponse" message="tns:findRangeResponse"/>
+</operation>
+<operation name="edit">
+<input wsam:Action="http://webservices/WSCobro/edit" message="tns:edit"/>
+</operation>
 </portType>
 <binding name="WSCobroPortBinding" type="tns:WSCobro">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="findAll">
+<operation name="remove">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+</operation>
+<operation name="count">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -125,13 +131,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="edit">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="findRange">
+<operation name="find">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -140,23 +140,11 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="getNewBalance">
+<operation name="create">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
 </input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
-<operation name="updateBalance">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
 </operation>
 <operation name="discountHold">
 <soap:operation soapAction=""/>
@@ -185,13 +173,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="remove">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-</operation>
-<operation name="count">
+<operation name="updateBalance">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -200,7 +182,7 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="find">
+<operation name="getNewBalance">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -209,7 +191,25 @@
 <soap:body use="literal"/>
 </output>
 </operation>
-<operation name="create">
+<operation name="findAll">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findRange">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="edit">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

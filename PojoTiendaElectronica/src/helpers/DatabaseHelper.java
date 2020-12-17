@@ -106,9 +106,16 @@ public class DatabaseHelper {
     public void seedDatabase() throws SQLException {
         System.out.println("Seeding database...");
         String[] inserts = {
-            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " 
-                + "VALUES (100,0,399.00)",
-            "INSERT into client (balance) VALUES (2000)"
+            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " + "VALUES (100,0,399.00)",
+            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " + "VALUES (10,0,39.00)",
+            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " + "VALUES (90,0,999.00)",
+            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " + "VALUES (77,0,3000.00)",
+            "INSERT INTO books (unitsAvailable,unitsOnHold,price) " + "VALUES (1,0,499.00)",
+            "INSERT into client (balance) VALUES (2000)",
+            "INSERT into client (balance) VALUES (2500)",
+            "INSERT into client (balance) VALUES (0)",
+            "INSERT into client (balance) VALUES (1200)",
+            "INSERT into client (balance) VALUES (9000)"      
         };
         for (String query : inserts) {
             executeStatement(query);

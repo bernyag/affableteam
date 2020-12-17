@@ -31,7 +31,7 @@ public class PojoTiendaElectronica {
         
         
         // Test WS Cobro
-        System.out.println(startPayment(1, 1, 1));
+        System.out.println(startPayment(1, ISBN, UNITS));
         
         
         

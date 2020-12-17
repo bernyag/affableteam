@@ -9,10 +9,8 @@ import javax.jws.WebParam;
 import javax.jws.WebService;
 
 /**
- * Codigo perteneciente a: Tutorial de BPEL con OpenESB
  *
- * @author www.adictosaltrabajo.com - Ivan Garcia Puebla
- * @version 1.0
+ * @author bernardoaltamirano
  */
 @WebService()
 public class WSAlmacen {
@@ -20,6 +18,12 @@ public class WSAlmacen {
     @EJB
     private BooksFacade ejbRef;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
+
+    
+    @WebMethod(operationName = "findByIsbn")
+    public Books findByIsbn(@WebParam(name = "isbn") int isbn) {
+        return ejbRef.findByIsbn(isbn);
+    }
 
     /**
      * Operacion de un servicio web implementado con JAX-WS que comprueba el
@@ -29,11 +33,6 @@ public class WSAlmacen {
      * @param unidades Unidades del producto solicitadas
      * @return True si hay unidades disponibles.
      */
-    @WebMethod(operationName = "findByIsbn")
-    public Books findByIsbn(@WebParam(name = "isbn") int isbn) {
-        return ejbRef.findByIsbn(isbn);
-    }
-
     @WebMethod(operationName = "checkStock")
     public boolean checkStock(@WebParam(name = "isbn") int isbn, @WebParam(name = "unidades") int unidades) {
 
@@ -55,8 +54,9 @@ public class WSAlmacen {
     }
 
     @WebMethod(operationName = "startOrder")
-    public String startOrder(@WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
-        String res = "";
+    public Boolean startOrder(@WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) throws Exception {
+        String err = "";
+        boolean res = false;
         if (Integer.toString(isbn).length() == 1) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
 
             Books b = ejbRef.findByIsbn(isbn);
@@ -64,20 +64,25 @@ public class WSAlmacen {
                 if (units >= 1) {
                     if (checkStock(isbn, units)) {
                         holdStock(isbn, units);
-                        res = "An order has been created for the book with ISBN = " + isbn + "."
+                        err = "An order has been created for the book with ISBN = " + isbn + "."
                                 + "\n\t" + units + " unit(s) have been placed on hold while validating the account's funds.";
+                        res = true;
                     } else {
-                        res = "There is unsufficient stock for the book with ISBN = " + isbn + ". The stock available is of " + b.getUnitsavailable() + " unit(s) and you tried " + units + ", please try an amount less than or equal to the one available.";
+                        err = "There is unsufficient stock for the book with ISBN = " + isbn + ". The stock available is of " + b.getUnitsavailable() + " unit(s) and you tried " + units + ", please try an amount less than or equal to the one available.";
+                        throw new Exception(err);
                     }
                 } else {
-                    res = "Please enter an amount of units greater than 0.";
+                    err = "Please enter an amount of units greater than 0.";
+                    throw new Exception(err);
                 }
             } else {
-                res = "The books with ISBN  = " + isbn + " is not registered in the database. Please try with another ISBN.";
+                err = "The book with ISBN  = " + isbn + " is not registered in the database. Please try with another ISBN.";
+                throw new Exception(err);
             }
 
         } else {
-            res = "Please enter an ISBN with length of 13 digits.";
+            err = "Please enter an ISBN with length of 1 digit.";   //TODO: should be 13 for an ISBN of 13 digits
+            throw new Exception(err);
         }
         return res;
     }

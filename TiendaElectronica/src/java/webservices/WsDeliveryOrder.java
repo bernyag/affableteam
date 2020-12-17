@@ -29,7 +29,7 @@ public class WsDeliveryOrder {
 
     @WebMethod(operationName = "create")
     @Oneway
-    public void create(@WebParam(name = "entity") DeliveryOrder entity) {
+    public void create(@WebParam(name = "entity") DeliveryOrder entity) { //mandar los IDs y hacer un  delivery order  y pasarlo como entity
         ejbRef.create(entity);
     }
 

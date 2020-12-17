@@ -57,7 +57,7 @@ public class WSAlmacen {
     @WebMethod(operationName = "startOrder")
     public String startOrder(@WebParam(name = "isbn") int isbn, @WebParam(name = "units") int units) {
         String res = "";
-        if (Integer.toString(isbn).length() == 1) { // TODO: Check that the ISBN used is in the 13 digit ISBN format 
+        if (Integer.toString(isbn).length() == 1) { // TODO: Check that the ISBN used is in the 13 digit ISBN format, for now it's a simple ID of 1  digit 
 
             Books b = ejbRef.findByIsbn(isbn);
             if (b.getIsbn() != -1) {    //Check if the ISBN is in the database

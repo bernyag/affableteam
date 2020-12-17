@@ -65,4 +65,9 @@ public class WsDeliveryCompany {
         return ejbRef.count();
     }
     
+    @WebMethod(operationName = "findByIsbn")
+    public DeliveryCompany findByDeliveryId(@WebParam(name = "deliveryId") int deliveryId) {
+        return ejbRef.findById(deliveryId);
+    }
+    
 }

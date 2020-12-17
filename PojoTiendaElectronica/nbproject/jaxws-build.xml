@@ -67,5 +67,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/WsClient"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService, wsimport-client-WSCobro, wsimport-client-WsClient"/>
+    <target name="wsimport-client-WsDeliveryOrder" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/WsDeliveryOrder"/>
+        <property name="wsdl-WsDeliveryOrder" location="xml-resources/web-service-references/WsDeliveryOrder/wsdl/localhost_8080/WsDeliveryOrder/WsDeliveryOrder.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/WsDeliveryOrder" destdir="${build.generated.dir}/jax-wsCache/WsDeliveryOrder" wsdl="${wsdl-WsDeliveryOrder}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:8080/WsDeliveryOrder/WsDeliveryOrder?WSDL" xnocompile="true" xendorsed="true">
+            <depends file="${wsdl-WsDeliveryOrder}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/WsDeliveryOrder"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/WsDeliveryOrder">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-WsDeliveryOrder" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/WsDeliveryOrder"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/webservices"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService, wsimport-client-WSCobro, wsimport-client-WsClient, wsimport-client-WsDeliveryOrder"/>
 </project>

@@ -56,6 +56,11 @@ public class WSCobro {
         return ejbRef.find(id);
     }
 
+    @WebMethod(operationName = "findByIsbn")
+    public OrderBook findByOrderId(@WebParam(name = "orderId") int orderId) {
+        return ejbRef.findByOrderId(orderId);
+    }
+    
     @WebMethod(operationName = "findAll")
     public List<OrderBook> findAll() {
         return ejbRef.findAll();

@@ -33,9 +33,7 @@ public class PojoTiendaElectronica {
         // Test WS Cobro
         System.out.println(startPayment(1, ISBN, UNITS));
         
-        
-        
-        
+        createDeliveryOrder(1,1);
     }
 
     private static Books findByIsbn(int isbn) {
@@ -64,5 +62,12 @@ public class PojoTiendaElectronica {
         webservices.WsClient port = service.getWsClientPort();
         return port.findClientById(idClt);
     }
+
+    private static void createDeliveryOrder(int companyId, int orderId) {
+        webservices.WsDeliveryOrder_Service service = new webservices.WsDeliveryOrder_Service();
+        webservices.WsDeliveryOrder port = service.getWsDeliveryOrderPort();
+        port.createDeliveryOrder(companyId, orderId);
+    }
+    
 
 }

@@ -32,6 +32,19 @@ public class OrderBookFacade extends AbstractFacade<OrderBook> {
         super(OrderBook.class);
     }
     
+    
+    public OrderBook findByOrderId(int orderid)
+    {
+        OrderBook b = new OrderBook(-1);    //return a book with -1 for an ISBN that is not registered in the Database
+        em = getEntityManager();
+        TypedQuery<OrderBook> query = em.createNamedQuery("Books.findByOrderid", OrderBook.class);
+        query.setParameter("orderid", orderid);
+        java.util.List<OrderBook> lista= query.getResultList();
+        if (!lista.isEmpty())
+            b = lista.get(0);
+        return b;
+    }
+    
     public String getNewBalance(int isbn, int units, int clientId)
     {
         BigDecimal res;

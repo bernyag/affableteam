@@ -9,6 +9,7 @@ import entities.DeliveryCompany;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 
 /**
  *
@@ -27,6 +28,18 @@ public class DeliveryCompanyFacade extends AbstractFacade<DeliveryCompany> {
 
     public DeliveryCompanyFacade() {
         super(DeliveryCompany.class);
+    }
+    
+    public DeliveryCompany findById(int deliveryId)
+    {
+        DeliveryCompany dc = new DeliveryCompany(-1);
+        em = getEntityManager();
+        TypedQuery<DeliveryCompany> query = em.createNamedQuery("DeliveryCompany.findByIddelivery", DeliveryCompany.class);
+        query.setParameter("iddelivery", deliveryId);
+        java.util.List<DeliveryCompany> lista= query.getResultList();
+        if (!lista.isEmpty())
+            dc = lista.get(0);
+        return dc;
     }
     
 }

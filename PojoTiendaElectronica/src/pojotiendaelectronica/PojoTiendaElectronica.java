@@ -26,49 +26,52 @@ public class PojoTiendaElectronica {
      */
     public static void main(String[] args) throws Exception_Exception {
         try {
-            final int ISBN = 6;
-            final int UNITS = 3;
+            final int ISBN = 1;
+            final int UNITS = 1;
+            final int COMPANYID = 1;
+            final int CLIENTID = 1;
             
             // Create a new delivery company
-            DeliveryCompany company = new DeliveryCompany();
-            company.setName("Super delivery company");
-            int companyId = (int)createDeliveryCompany(company);
-            
-            // Create a new customer
-            Client client = new Client();
-            client.setBalance(BigDecimal.valueOf(2000));
-            int clientId = createClient(client);
+//            DeliveryCompany company = new DeliveryCompany();
+//            company.setName("Super delivery company");
+//            int companyId = (int)createDeliveryCompany(company);
+//            
+//            // Create a new customer
+//            Client client = new Client();
+//            client.setBalance(BigDecimal.valueOf(2000));
+//            int clientId = createClient(client);
             
             Books b = findByIsbn(ISBN);
-            System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice()
-                    + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
+            System.out.println("----------------------------ORIGINAL STOCK------------------------------"+ "\n\tISBN: " + b.getIsbn() + ", Precio: " + b.getPrice()
+                    + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold() +"\n------------------------------------------------------------------------\n");
             
             if (startOrder(ISBN, UNITS))
-                System.out.println("An order has been created for the book with ISBN = " + ISBN + "."+"\n\t" + UNITS + " unit(s) have been placed on hold while validating the account's funds...");
+                System.out.println("An order has been created for the book with ISBN = " + ISBN + "."+"\n\t" + UNITS + " unit(s) have been placed on hold while validating the account's funds...\n");
+        
             b = findByIsbn(ISBN);
-            System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice()
-                    + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
+            System.out.println("----------------------------STOCK AFTER HOLD----------------------------"+ "\n\tISBN: " + b.getIsbn() + ", Precio: " + b.getPrice()
+                    + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold() +"\n------------------------------------------------------------------------\n");
             
             // Try to create a new order for given customer
             // This may fail if customer balance is less that order total amount
-            int orderId = startPayment(clientId, ISBN, UNITS);
+            int orderId = startPayment(CLIENTID, ISBN, UNITS);
             System.out.println("Order created with orderId: " + orderId);
             
             // Create delivery order given orderId and deliveryCompanyId
-            int deliveryEstimate = createDeliverOrder(companyId, orderId);
+            int deliveryEstimate = createDeliverOrder(COMPANYID, orderId);
             System.out.println("Estimated delivery days for this order: " + deliveryEstimate);
             
             // Try to create a second order
             // This one should fail bc customer has not enough money :(
             System.out.println("Trying to create a new order for same customer...");
-            int otherOrderId = startPayment(clientId, ISBN, UNITS);
+            int otherOrderId = startPayment(CLIENTID, ISBN, UNITS);
+            System.out.println("Estimated delivery days for this order: " + otherOrderId);
             
-            
-        } catch(wsalmacen.Exception_Exception ex){
-            Logger.getLogger(PojoTiendaElectronica.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (wsalmacen.Exception_Exception ex) {
+            System.err.println(ex.getMessage());
+        } catch (wscobro.Exception_Exception ex){
             System.err.println(ex.getMessage());
         }
-        
     }
 
     private static Books findByIsbn(int isbn) {

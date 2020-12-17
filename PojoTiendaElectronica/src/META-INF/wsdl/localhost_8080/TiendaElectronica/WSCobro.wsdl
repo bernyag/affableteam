@@ -4,12 +4,6 @@
 <xsd:import namespace="http://webservices/" schemaLocation="http://localhost:8080/TiendaElectronica/WSCobro?xsd=1"/>
 </xsd:schema>
 </types>
-<message name="findAll">
-<part name="parameters" element="tns:findAll"/>
-</message>
-<message name="findAllResponse">
-<part name="parameters" element="tns:findAllResponse"/>
-</message>
 <message name="edit">
 <part name="parameters" element="tns:edit"/>
 </message>
@@ -49,6 +43,18 @@
 <message name="startPaymentResponse">
 <part name="parameters" element="tns:startPaymentResponse"/>
 </message>
+<message name="newOrderBook">
+<part name="parameters" element="tns:newOrderBook"/>
+</message>
+<message name="newOrderBookResponse">
+<part name="parameters" element="tns:newOrderBookResponse"/>
+</message>
+<message name="findAll">
+<part name="parameters" element="tns:findAll"/>
+</message>
+<message name="findAllResponse">
+<part name="parameters" element="tns:findAllResponse"/>
+</message>
 <message name="remove">
 <part name="parameters" element="tns:remove"/>
 </message>
@@ -68,10 +74,6 @@
 <part name="parameters" element="tns:create"/>
 </message>
 <portType name="WSCobro">
-<operation name="findAll">
-<input wsam:Action="http://webservices/WSCobro/findAllRequest" message="tns:findAll"/>
-<output wsam:Action="http://webservices/WSCobro/findAllResponse" message="tns:findAllResponse"/>
-</operation>
 <operation name="edit">
 <input wsam:Action="http://webservices/WSCobro/edit" message="tns:edit"/>
 </operation>
@@ -99,6 +101,14 @@
 <input wsam:Action="http://webservices/WSCobro/startPaymentRequest" message="tns:startPayment"/>
 <output wsam:Action="http://webservices/WSCobro/startPaymentResponse" message="tns:startPaymentResponse"/>
 </operation>
+<operation name="newOrderBook">
+<input wsam:Action="http://webservices/WSCobro/newOrderBookRequest" message="tns:newOrderBook"/>
+<output wsam:Action="http://webservices/WSCobro/newOrderBookResponse" message="tns:newOrderBookResponse"/>
+</operation>
+<operation name="findAll">
+<input wsam:Action="http://webservices/WSCobro/findAllRequest" message="tns:findAll"/>
+<output wsam:Action="http://webservices/WSCobro/findAllResponse" message="tns:findAllResponse"/>
+</operation>
 <operation name="remove">
 <input wsam:Action="http://webservices/WSCobro/remove" message="tns:remove"/>
 </operation>
@@ -116,15 +126,6 @@
 </portType>
 <binding name="WSCobroPortBinding" type="tns:WSCobro">
 <soap:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
-<operation name="findAll">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
-</operation>
 <operation name="edit">
 <soap:operation soapAction=""/>
 <input>
@@ -177,6 +178,24 @@
 </output>
 </operation>
 <operation name="startPayment">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="newOrderBook">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findAll">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>

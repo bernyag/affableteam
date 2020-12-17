@@ -10,7 +10,6 @@ import facades.ClientFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
-import javax.ejb.Stateless;
 import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -20,7 +19,6 @@ import javax.jws.WebParam;
  * @author jaimelimonsamperio
  */
 @WebService(serviceName = "WsClient")
-@Stateless()
 public class WsClient {
 
     @EJB
@@ -28,9 +26,9 @@ public class WsClient {
     // "Insert Code > Add Web Service Operation")
 
     @WebMethod(operationName = "create")
-    @Oneway
-    public void create(@WebParam(name = "entity") Client entity) {
+    public int create(@WebParam(name = "entity") Client entity) {
         ejbRef.create(entity);
+        return entity.getClientid();
     }
 
     @WebMethod(operationName = "edit")

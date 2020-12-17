@@ -28,20 +28,23 @@
 <message name="create">
 <part name="parameters" element="tns:create"/>
 </message>
+<message name="createResponse">
+<part name="parameters" element="tns:createResponse"/>
+</message>
 <message name="findClientById">
 <part name="parameters" element="tns:findClientById"/>
 </message>
 <message name="findClientByIdResponse">
 <part name="parameters" element="tns:findClientByIdResponse"/>
 </message>
-<message name="edit">
-<part name="parameters" element="tns:edit"/>
-</message>
 <message name="findRange">
 <part name="parameters" element="tns:findRange"/>
 </message>
 <message name="findRangeResponse">
 <part name="parameters" element="tns:findRangeResponse"/>
+</message>
+<message name="edit">
+<part name="parameters" element="tns:edit"/>
 </message>
 <portType name="WsClient">
 <operation name="findAll">
@@ -60,18 +63,19 @@
 <output wsam:Action="http://wsclient/WsClient/findResponse" message="tns:findResponse"/>
 </operation>
 <operation name="create">
-<input wsam:Action="http://wsclient/WsClient/create" message="tns:create"/>
+<input wsam:Action="http://wsclient/WsClient/createRequest" message="tns:create"/>
+<output wsam:Action="http://wsclient/WsClient/createResponse" message="tns:createResponse"/>
 </operation>
 <operation name="findClientById">
 <input wsam:Action="http://wsclient/WsClient/findClientByIdRequest" message="tns:findClientById"/>
 <output wsam:Action="http://wsclient/WsClient/findClientByIdResponse" message="tns:findClientByIdResponse"/>
 </operation>
-<operation name="edit">
-<input wsam:Action="http://wsclient/WsClient/edit" message="tns:edit"/>
-</operation>
 <operation name="findRange">
 <input wsam:Action="http://wsclient/WsClient/findRangeRequest" message="tns:findRange"/>
 <output wsam:Action="http://wsclient/WsClient/findRangeResponse" message="tns:findRangeResponse"/>
+</operation>
+<operation name="edit">
+<input wsam:Action="http://wsclient/WsClient/edit" message="tns:edit"/>
 </operation>
 </portType>
 <binding name="WsClientPortBinding" type="tns:WsClient">
@@ -114,8 +118,20 @@
 <input>
 <soap:body use="literal"/>
 </input>
+<output>
+<soap:body use="literal"/>
+</output>
 </operation>
 <operation name="findClientById">
+<soap:operation soapAction=""/>
+<input>
+<soap:body use="literal"/>
+</input>
+<output>
+<soap:body use="literal"/>
+</output>
+</operation>
+<operation name="findRange">
 <soap:operation soapAction=""/>
 <input>
 <soap:body use="literal"/>
@@ -129,15 +145,6 @@
 <input>
 <soap:body use="literal"/>
 </input>
-</operation>
-<operation name="findRange">
-<soap:operation soapAction=""/>
-<input>
-<soap:body use="literal"/>
-</input>
-<output>
-<soap:body use="literal"/>
-</output>
 </operation>
 </binding>
 <service name="WsClient">

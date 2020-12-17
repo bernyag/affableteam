@@ -28,4 +28,6 @@
     <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryCompany?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryCompany.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryOrder?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryOrder.wsdl"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WsDeliveryOrder?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WsDeliveryOrder.xsd_1.xsd"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WsClient?WSDL" uri="wsdl/localhost_8080/TiendaElectronica/WsClient.wsdl"/>
+    <system systemId="http://localhost:8080/TiendaElectronica/WsClient?xsd=1" uri="wsdl/localhost_8080/TiendaElectronica/WsClient.xsd_1.xsd"/>
 </catalog>

@@ -25,6 +25,17 @@ public class PojoTiendaElectronica {
     public static void main(String[] args) throws Exception_Exception {
         final int ISBN = 1;
         final int UNITS = 3;
+        
+        // Create a new delivery company
+        DeliveryCompany company = new DeliveryCompany();
+        company.setName("Super delivery company");
+        int companyId = (int)createDeliveryCompany(company);
+        
+        // Create a new customer
+        Client client = new Client();
+        client.setBalance(BigDecimal.valueOf(2000));
+        int clientId = createClient(client);
+        
         Books b = findByIsbn(ISBN);
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
@@ -33,25 +44,23 @@ public class PojoTiendaElectronica {
         System.out.println("ISBN: " + b.getIsbn() + ", Precio: " + b.getPrice() 
                 + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold());
         
+        // Try to create a new order for given customer
+        // This may fail if customer balance is less that order total amount
+        int orderId = startPayment(clientId, ISBN, UNITS);
+        System.out.println("Order created with orderId: " + orderId);
         
-        // Test WS Cobro
-        startPayment(1, ISBN, UNITS); //Returns new order ID (int)
+        // Create delivery order given orderId and deliveryCompanyId
+        int deliveryEstimate = createDeliverOrder(companyId, orderId);
+        System.out.println("Estimated delivery days for this order: " + deliveryEstimate);
         
-        // TODO: startPayment method should return orderId
-        
-        // Create a new delivery company
-        DeliveryCompany company = new DeliveryCompany();
-        company.setName("Super delivery company");
-        company.setIddelivery(1);
-        
-        // Get company id after creation
-        int companyId = (int)createDeliveryCompany(company);
-        System.out.println("Company id: " + companyId);
-        
-        // Create delivery order getting delivery estimate
-        // TODO: Use orderId returned from startPayment
-        int deliveryEstimate = createDeliverOrder(companyId, 1);
-        System.out.println("Estimated delivery in days: " + deliveryEstimate);
+        // Try to create a second order
+        // This one should fail bc customer has not enough money :(
+        System.out.println("Trying to create a new order for same customer...");
+        try {
+            int otherOrderId = startPayment(clientId, ISBN, UNITS);
+        } catch(Exception ex){
+            System.out.println(ex.getMessage());
+        }
         
     }
 
@@ -92,6 +101,12 @@ public class PojoTiendaElectronica {
         wsdeliveryorder.WsDeliveryOrder_Service service = new wsdeliveryorder.WsDeliveryOrder_Service();
         wsdeliveryorder.WsDeliveryOrder port = service.getWsDeliveryOrderPort();
         return port.deliverOrder(idEmpresa, idPedido);
+    }
+
+    private static int createClient(wsclient.Client entity) {
+        wsclient.WsClient_Service service = new wsclient.WsClient_Service();
+        wsclient.WsClient port = service.getWsClientPort();
+        return port.create(entity);
     }
 
 }

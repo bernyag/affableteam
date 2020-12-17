@@ -8,6 +8,7 @@ package pojotiendaelectronica;
 import java.math.BigDecimal;
 import wsalmacen.Books;
 import wsclient.Client;
+import wscobro.Exception_Exception;
 import wsdeliverycompany.DeliveryCompany;
 import wsdeliveryorder.DeliveryOrder;
 
@@ -19,8 +20,9 @@ public class PojoTiendaElectronica {
 
     /**
      * @param args the command line arguments
+     * @throws wscobro.Exception_Exception
      */
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception_Exception {
         final int ISBN = 1;
         final int UNITS = 3;
         Books b = findByIsbn(ISBN);
@@ -33,7 +35,7 @@ public class PojoTiendaElectronica {
         
         
         // Test WS Cobro
-        System.out.println(startPayment(1, ISBN, UNITS));
+        startPayment(1, ISBN, UNITS); //Returns new order ID (int)
         
         // TODO: startPayment method should return orderId
         
@@ -66,7 +68,7 @@ public class PojoTiendaElectronica {
     }
     
     // WS Cobro
-    private static String startPayment(int idClt, int isbn, int units) {
+    private static int startPayment(int idClt, int isbn, int units) throws Exception_Exception {
         wscobro.WSCobro_Service service = new wscobro.WSCobro_Service();
         wscobro.WSCobro port = service.getWSCobroPort();
         return port.startPayment(idClt, isbn, units);

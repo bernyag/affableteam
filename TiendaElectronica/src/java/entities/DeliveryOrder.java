@@ -39,13 +39,16 @@ public class DeliveryOrder implements Serializable {
     @Basic(optional = false)
     @Column(name = "DELIVERORDERID")
     private Integer deliverorderid;
+    
     @Basic(optional = false)
     @NotNull
     @Column(name = "DELIVERYDAYS")
     private int deliverydays;
+    
     @JoinColumn(name = "IDDELIVERY", referencedColumnName = "IDDELIVERY")
     @ManyToOne(optional = false)
     private DeliveryCompany iddelivery;
+    
     @JoinColumn(name = "ORDERID", referencedColumnName = "ORDERID")
     @ManyToOne(optional = false)
     private OrderBook orderid;

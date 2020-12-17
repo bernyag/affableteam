@@ -3,14 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package webservices;
+package wsdeliverycompany;
 
-import entities.DeliveryOrder;
-import facades.DeliveryOrderFacade;
+import entities.DeliveryCompany;
+import facades.DeliveryCompanyFacade;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.jws.WebService;
-import javax.ejb.Stateless;
 import javax.jws.Oneway;
 import javax.jws.WebMethod;
 import javax.jws.WebParam;
@@ -19,44 +18,43 @@ import javax.jws.WebParam;
  *
  * @author jaimelimonsamperio
  */
-@WebService(serviceName = "WsDeliveryOrder")
-@Stateless()
-public class WsDeliveryOrder {
+@WebService(serviceName = "WsDeliveryCompany")
+public class WsDeliveryCompany {
 
     @EJB
-    private DeliveryOrderFacade ejbRef;// Add business logic below. (Right-click in editor and choose
+    private DeliveryCompanyFacade ejbRef;// Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Web Service Operation")
 
     @WebMethod(operationName = "create")
-    @Oneway
-    public void create(@WebParam(name = "entity") DeliveryOrder entity) {
+    public long create(@WebParam(name = "entity") DeliveryCompany entity) {
         ejbRef.create(entity);
+        return entity.getIddelivery();
     }
 
     @WebMethod(operationName = "edit")
     @Oneway
-    public void edit(@WebParam(name = "entity") DeliveryOrder entity) {
+    public void edit(@WebParam(name = "entity") DeliveryCompany entity) {
         ejbRef.edit(entity);
     }
 
     @WebMethod(operationName = "remove")
     @Oneway
-    public void remove(@WebParam(name = "entity") DeliveryOrder entity) {
+    public void remove(@WebParam(name = "entity") DeliveryCompany entity) {
         ejbRef.remove(entity);
     }
 
     @WebMethod(operationName = "find")
-    public DeliveryOrder find(@WebParam(name = "id") Object id) {
+    public DeliveryCompany find(@WebParam(name = "id") Object id) {
         return ejbRef.find(id);
     }
 
     @WebMethod(operationName = "findAll")
-    public List<DeliveryOrder> findAll() {
+    public List<DeliveryCompany> findAll() {
         return ejbRef.findAll();
     }
 
     @WebMethod(operationName = "findRange")
-    public List<DeliveryOrder> findRange(@WebParam(name = "range") int[] range) {
+    public List<DeliveryCompany> findRange(@WebParam(name = "range") int[] range) {
         return ejbRef.findRange(range);
     }
 

@@ -2,19 +2,19 @@
 <jax-ws xmlns="http://www.netbeans.org/ns/jax-ws/1">
   <services>
     <service name="WSAlmacen">
-      <implementation-class>webservices.WSAlmacen</implementation-class>
+      <implementation-class>wsalmacen.WSAlmacen</implementation-class>
     </service>
     <service name="WsClient">
-      <implementation-class>webservices.WsClient</implementation-class>
+      <implementation-class>wsclient.WsClient</implementation-class>
     </service>
     <service name="WSCobro">
-      <implementation-class>webservices.WSCobro</implementation-class>
-    </service>
-    <service name="WsDeliveryOrder">
-      <implementation-class>webservices.WsDeliveryOrder</implementation-class>
+      <implementation-class>wscobro.WSCobro</implementation-class>
     </service>
     <service name="WsDeliveryCompany">
-      <implementation-class>webservices.WsDeliveryCompany</implementation-class>
+      <implementation-class>wsdeliverycompany.WsDeliveryCompany</implementation-class>
+    </service>
+    <service name="WsDeliveryOrder">
+      <implementation-class>wsdeliveryorder.WsDeliveryOrder</implementation-class>
     </service>
   </services>
   <clients/>

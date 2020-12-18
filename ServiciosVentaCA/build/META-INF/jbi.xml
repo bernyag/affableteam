@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://j2ee.netbeans.org/wsdl/ServiciosVenta1/src/VentaLibrosWSDL" xmlns:ns2="http://enterprise.netbeans.org/bpel/ServiciosVenta1/serviciosVenta1" xmlns:ns3="http://wscobro/" xmlns:ns4="http://wsalmacen/" xmlns:ns5="http://wsdeliveryorder/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" version="1.0" xsi:schemaLocation="http://java.sun.com/xml/ns/jbi ./jbi.xsd">
+    <service-assembly>
+        <identification>
+            <name>ServiciosVentaCA</name>
+            <description>Represents the Service Assembly of ServiciosVentaCA</description>
+        </identification>
+        <service-unit>
+            <identification>
+                <name>ServiciosVentaCA-ServiciosVenta1</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>ServiciosVenta1.jar</artifacts-zip>
+                <component-name>sun-bpel-engine</component-name>
+            </target>
+        </service-unit>
+        <service-unit>
+            <identification>
+                <name>ServiciosVentaCA-sun-http-binding</name>
+                <description>Represents this Service Unit</description>
+            </identification>
+            <target>
+                <artifacts-zip>sun-http-binding.jar</artifacts-zip>
+                <component-name>sun-http-binding</component-name>
+            </target>
+        </service-unit>
+        <connections>
+            <connection>
+                <consumer endpoint-name="VentaLibrosWSDLPort" service-name="ns1:VentaLibrosWSDLService"/>
+                <provider endpoint-name="VentaLibrosWSDLPortTypeRole_myRole" service-name="ns2:VentaLibros"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="WSCobroRole_partnerRole" service-name="ns2:Cobro"/>
+                <provider endpoint-name="WSCobroPort" service-name="ns3:WSCobro"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="WSAlmacenRole_partnerRole" service-name="ns2:AlmacenService"/>
+                <provider endpoint-name="WSAlmacenPort" service-name="ns4:WSAlmacenService"/>
+            </connection>
+            <connection>
+                <consumer endpoint-name="WsDeliveryOrderRole_partnerRole" service-name="ns2:DeliveryOrder"/>
+                <provider endpoint-name="WsDeliveryOrderPort" service-name="ns5:WsDeliveryOrder"/>
+            </connection>
+        </connections>
+        <route-types xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <source endpoint-name="VentaLibrosWSDLPort" mode="local" routing-rule="default" service-name="ns1:VentaLibrosWSDLService">direct</source>
+            <source endpoint-name="WSCobroRole_partnerRole" mode="local" routing-rule="default" service-name="ns2:Cobro">direct</source>
+            <source endpoint-name="WSAlmacenRole_partnerRole" mode="local" routing-rule="default" service-name="ns2:AlmacenService">direct</source>
+            <source endpoint-name="WsDeliveryOrderRole_partnerRole" mode="local" routing-rule="default" service-name="ns2:DeliveryOrder">direct</source>
+        </route-types>
+        <interface-mapping xmlns="http://www.open-esb.net/xml/ns/jbi">
+            <implementation>
+                <by-provider endpoint-name="VentaLibrosWSDLPortTypeRole_myRole" service-name="ns2:VentaLibros"/>
+                <interface name="ns1:VentaLibrosWSDLPortType"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="WSCobroPort" service-name="ns3:WSCobro"/>
+                <interface name="ns3:WSCobro"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="WSAlmacenPort" service-name="ns4:WSAlmacenService"/>
+                <interface name="ns4:WSAlmacen"/>
+            </implementation>
+            <implementation>
+                <by-provider endpoint-name="WsDeliveryOrderPort" service-name="ns5:WsDeliveryOrder"/>
+                <interface name="ns5:WsDeliveryOrder"/>
+            </implementation>
+        </interface-mapping>
+    </service-assembly>
+</jbi>

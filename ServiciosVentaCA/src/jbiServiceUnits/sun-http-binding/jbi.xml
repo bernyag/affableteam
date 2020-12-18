@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<jbi xmlns="http://java.sun.com/xml/ns/jbi" xmlns:ns1="http://j2ee.netbeans.org/wsdl/ServiciosVenta1/src/VentaLibrosWSDL" xmlns:ns2="http://enterprise.netbeans.org/bpel/ServiciosVenta1/serviciosVenta1" xmlns:ns3="http://wscobro/" xmlns:ns4="http://wsalmacen/" xmlns:ns5="http://wsdeliveryorder/" version="1.0">
+    <services binding-component="true">
+        <provides endpoint-name="WSCobroPort" interface-name="ns3:WSCobro" service-name="ns3:WSCobro"/>
+        <provides endpoint-name="WSAlmacenPort" interface-name="ns4:WSAlmacen" service-name="ns4:WSAlmacenService"/>
+        <provides endpoint-name="WsDeliveryOrderPort" interface-name="ns5:WsDeliveryOrder" service-name="ns5:WsDeliveryOrder"/>
+        <consumes endpoint-name="VentaLibrosWSDLPort" interface-name="ns1:VentaLibrosWSDLPortType" service-name="ns1:VentaLibrosWSDLService"/>
+    </services>
+</jbi>

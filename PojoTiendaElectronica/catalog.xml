@@ -33,4 +33,5 @@
     <system systemId="http://localhost:8080/TiendaElectronica/WsClient?xsd=1" uri="xml-resources/web-service-references/WsClient/wsdl/localhost_8080/TiendaElectronica/WsClient.xsd_1.xsd"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?WSDL" uri="xml-resources/web-service-references/WSAlmacenService/wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.wsdl"/>
     <system systemId="http://localhost:8080/TiendaElectronica/WSAlmacenService?xsd=1" uri="xml-resources/web-service-references/WSAlmacenService/wsdl/localhost_8080/TiendaElectronica/WSAlmacenService.xsd_1.xsd"/>
+    <system systemId="http://localhost:9080/VentaLibrosWSDLService/VentaLibrosWSDLPort?WSDL" uri="xml-resources/web-service-references/VentaLibrosWSDLPort/wsdl/localhost_9080/VentaLibrosWSDLService/VentaLibrosWSDLPort.wsdl"/>
 </catalog>

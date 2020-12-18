@@ -6,6 +6,8 @@
 package pojotiendaelectronica;
 
 import java.math.BigDecimal;
+import java.rmi.registry.LocateRegistry;
+import java.rmi.registry.Registry;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import wsalmacen.Books;
@@ -25,53 +27,59 @@ public class PojoTiendaElectronica {
      * @throws wscobro.Exception_Exception
      */
     public static void main(String[] args) throws Exception_Exception {
-        try {
-            final int ISBN = 1;
-            final int UNITS = 1;
-            final int COMPANYID = 1;
-            final int CLIENTID = 1;
-            
-            // Create a new delivery company
-//            DeliveryCompany company = new DeliveryCompany();
-//            company.setName("Super delivery company");
-//            int companyId = (int)createDeliveryCompany(company);
-//            
-//            // Create a new customer
-//            Client client = new Client();
-//            client.setBalance(BigDecimal.valueOf(2000));
-//            int clientId = createClient(client);
-            
-            Books b = findByIsbn(ISBN);
-            System.out.println("----------------------------ORIGINAL STOCK------------------------------"+ "\n\tISBN: " + b.getIsbn() + ", Precio: " + b.getPrice()
-                    + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold() +"\n------------------------------------------------------------------------\n");
-            
-            if (startOrder(ISBN, UNITS))
-                System.out.println("An order has been created for the book with ISBN = " + ISBN + "."+"\n\t" + UNITS + " unit(s) have been placed on hold while validating the account's funds...\n");
         
-            b = findByIsbn(ISBN);
-            System.out.println("----------------------------STOCK AFTER HOLD----------------------------"+ "\n\tISBN: " + b.getIsbn() + ", Precio: " + b.getPrice()
-                    + ", Units available: " + b.getUnitsavailable() + ", Units on hold: " +b.getUnitsonhold() +"\n------------------------------------------------------------------------\n");
-            
-            // Try to create a new order for given customer
-            // This may fail if customer balance is less that order total amount
-            int orderId = startPayment(CLIENTID, ISBN, UNITS);
-            System.out.println("Order created with orderId: " + orderId);
-            
-            // Create delivery order given orderId and deliveryCompanyId
-            int deliveryEstimate = createDeliverOrder(COMPANYID, orderId);
-            System.out.println("Estimated delivery days for this order: " + deliveryEstimate);
-            
-            // Try to create a second order
-            // This one should fail bc customer has not enough money :(
-            System.out.println("Trying to create a new order for same customer...");
-            int otherOrderId = startPayment(CLIENTID, ISBN, UNITS);
-            System.out.println("Estimated delivery days for this order: " + otherOrderId);
-            
-        } catch (wsalmacen.Exception_Exception ex) {
-            System.err.println(ex.getMessage());
-        } catch (wscobro.Exception_Exception ex){
-            System.err.println(ex.getMessage());
+        String host = (args.length < 1) ? null : args[0];
+        long lngQuienSoy;
+        long lngCuantosMilisFaltan;
+        long sumDeltaT, sumDeltaT2, dtMin = 0,dtMax = 0;
+        int n= 10;
+        int ISBN = 1;
+        int UNITS = 1;
+        int COMPANYID = 1;
+        int CLIENTID = 1;
+        int orderId = 1;
+        
+        if(args.length >0){
+            for(int x=0; x<args.length;x++)
+                System.out.println("args["+x+"]" +args[x]);
         }
+        else{
+            System.out.println("Sin argumentos");
+        }
+        
+        try {
+            
+            Registry registry = LocateRegistry.getRegistry(host);
+            IServDisparo servDisparo = (IServDisparo) registry.lookup("ServidorDeDisparo");
+            lngQuienSoy = servDisparo.quienSoy();
+            lngCuantosMilisFaltan = servDisparo.deltaTEnMilis();
+            System.out.println("Cliente " + lngQuienSoy + " faltan " + lngCuantosMilisFaltan  + " milisegundos");
+            sumDeltaT  = 0;
+            sumDeltaT2 = 0;
+            Thread.currentThread().sleep(lngCuantosMilisFaltan);
+ 
+            //Crear ordenes 
+            for(int i= 0; i < n; i++){
+                
+                ISBN = (int) (Math.random()*4) + 1 ; // Generar un numero random para el ISBN DEL 1 AL 5 
+                UNITS = (int) (Math.random()*4) + 1 ;
+                CLIENTID = 1;
+              
+                try{
+                    orderId = startPayment(CLIENTID, ISBN, UNITS);
+                    System.out.println("Orden aceptada:" +orderId);
+                }
+                catch(Exception e){
+                    System.out.println("Upsss el pedido no se pudo pedir, intentare con otro cliente ");
+                    CLIENTID = CLIENTID +1 ;
+                }
+            }
+        }
+        catch (Exception e) {
+            System.err.println("Client exception: " + e.toString());
+            e.printStackTrace();
+        }
+        
     }
 
     private static Books findByIsbn(int isbn) {
@@ -119,4 +127,12 @@ public class PojoTiendaElectronica {
         return port.create(entity);
     }
 
+    private static String ventaLibrosWSDLOperation(int isbn, int idCliente, int unidades, int idComp) {
+        TiendaCA.VentaLibrosWSDLService service = new TiendaCA.VentaLibrosWSDLService();
+        TiendaCA.VentaLibrosWSDLPortType port = service.getVentaLibrosWSDLPort();
+        return port.ventaLibrosWSDLOperation(isbn, idCliente, unidades, idComp);
+    } 
+    
+    
+    
 }

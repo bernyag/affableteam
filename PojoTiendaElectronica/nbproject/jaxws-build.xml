@@ -101,5 +101,22 @@
         <delete dir="${build.generated.dir}/jax-wsCache/WsClient"/>
         <delete dir="${build.generated.sources.dir}/jax-ws/wsclient"/>
     </target>
-    <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService, wsimport-client-WSCobro, wsimport-client-WsDeliveryCompany, wsimport-client-WsDeliveryOrder, wsimport-client-WsClient"/>
+    <target name="wsimport-client-VentaLibrosWSDLPort" depends="wsimport-init">
+        <mkdir dir="${build.generated.dir}/jax-wsCache/VentaLibrosWSDLPort"/>
+        <property name="wsdl-VentaLibrosWSDLPort" location="xml-resources/web-service-references/VentaLibrosWSDLPort/wsdl/localhost_9080/VentaLibrosWSDLService/VentaLibrosWSDLPort.wsdl"/>
+        <wsimport sourcedestdir="${build.generated.dir}/jax-wsCache/VentaLibrosWSDLPort" destdir="${build.generated.dir}/jax-wsCache/VentaLibrosWSDLPort" wsdl="${wsdl-VentaLibrosWSDLPort}" catalog="catalog.xml" encoding="${source.encoding}" extension="true" verbose="true" fork="false" wsdlLocation="http://localhost:9080/VentaLibrosWSDLService/VentaLibrosWSDLPort?WSDL" xnocompile="true" xendorsed="true" package="TiendaCA">
+            <depends file="${wsdl-VentaLibrosWSDLPort}"/>
+            <produces dir="${build.generated.dir}/jax-wsCache/VentaLibrosWSDLPort"/>
+        </wsimport>
+        <copy todir="${build.generated.sources.dir}/jax-ws">
+            <fileset dir="${build.generated.dir}/jax-wsCache/VentaLibrosWSDLPort">
+                <include name="**/*.java"/>
+            </fileset>
+        </copy>
+    </target>
+    <target name="wsimport-client-clean-VentaLibrosWSDLPort" depends="-init-project">
+        <delete dir="${build.generated.dir}/jax-wsCache/VentaLibrosWSDLPort"/>
+        <delete dir="${build.generated.sources.dir}/jax-ws/TiendaCA"/>
+    </target>
+    <target name="wsimport-client-generate" depends="wsimport-client-WSAlmacenService, wsimport-client-WSCobro, wsimport-client-WsDeliveryCompany, wsimport-client-WsDeliveryOrder, wsimport-client-WsClient, wsimport-client-VentaLibrosWSDLPort"/>
 </project>

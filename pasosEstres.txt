@@ -1,0 +1,16 @@
+Verificar que el .jar  funcione en la terminal.
+java -jar "C:\Users\agnar\Documents\sce\Proyectos\final\affableteam\PojoTiendaElectronica.jar"
+En el archivo cjk.bat debemos de cambiar el cd en donde esten nuestros estresadores, en este caso : 
+
+Ahora en los bats : 2 , 3 ,4 y 5 debemos de poner el nuevo nombre del archivo recien pegado
+
+Agregar el cjk.bat a la carpeta principal
+
+cambiar en el 4_estresa el nombre del cliente por el que tenemos en nuestro proyecto
+
+abrimos cmd y nos paramos en la direccion donde estan nuestros .bats y corremos gen despues solo corremos :
+0 en el proceso 1 
+2 en el proceso 2 
+3 en el proceso 3
+4 en el proceso 4
+5 en cualquier proceso menos en el 2

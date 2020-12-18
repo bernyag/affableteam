@@ -1,0 +1,31 @@
+OPENESB
+Tenemos que hacer un Composite Aplication para integrar todos los .wsdl que estan en nuetro proyecto. 
+
+New proyect / Composite Aplication / asignamos un nombre TiendaElectronica 
+
+Arrastramos todo el proyecto a la parte de internal Modules y le damos con el martillo un chingo de veces
+
+
+testcase / propiedades /destination <- copiar 
+
+
+
+
+WSDL buscarlo 
+
+ir al navegador pegamos el destination:
+1)Borramos el default port y escribimos 9080
+2)en la parte final agregamos ?WSDL 
+3) Verificamos y copiamos el url  * 
+
+Creamos un java pojo normalito 
+
+EN el pojo / new service client / Pegar * en el WSDL URL ,package / finish 
+
+clic derecho, insert code, call web service operation , seleccionar la operacion. 
+
+//LE PONES EL DATO SE VA Y REGRESA
+Tenemos que declarar javax.xml.ws.Holder<java.lang.String> mensaje = new javax.xml.ws.Holder<>(); 
+mensaje.value = "Rafaelito" 
+nombrefuncion(mensaje); 
+sout(mensaje.value );
